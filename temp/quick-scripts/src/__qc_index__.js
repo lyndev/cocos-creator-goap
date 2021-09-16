@@ -1,4 +1,17 @@
 
+require('./assets/goap/ActionDataStatus');
+require('./assets/goap/DataMemory');
+require('./assets/goap/Eating');
+require('./assets/goap/Entity');
+require('./assets/goap/Env');
+require('./assets/goap/Equip');
+require('./assets/goap/Fire');
+require('./assets/goap/FireNpc');
+require('./assets/goap/GotoEatAction');
+require('./assets/goap/GotoEquipmentAction');
+require('./assets/goap/GotoFireAction');
+require('./assets/goap/GotoToiletAction');
+require('./assets/goap/Toilet');
 require('./assets/src/NewScript');
 require('./assets/src/app/ai/fsm/StateManager');
 require('./assets/src/app/ai/fsm/state/StateBase');

@@ -15,13 +15,14 @@ export abstract class GoapAction {
 
 	private inRange: boolean = false;
 
-	/* The cost of performing the action. 
-	 * Figure out a weight that suits the action. 
-	 * Changing it will affect what actions are chosen during planning.*/
+	/* 执行动作的成本。
+	* 找出适合动作的重量。
+	* 更改它将影响在计划期间选择的操作。*/
 	public cost: number = 1;
 
+	
 	/**
-	 * An action often has to perform on an object. This is that object. Can be null. */
+	* 一个动作通常必须在一个对象上执行。这就是那个对象。可以为空。 */
 	public target: VGameObject;
 
 	public constructor() {

@@ -1,7 +1,6 @@
 {
-  "ver": "2.3.7",
+  "ver": "2.3.5",
   "uuid": "cf72446f-5789-41a4-a124-2ee68c96cf6b",
-  "importer": "texture",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -13,9 +12,8 @@
   "platformSettings": {},
   "subMetas": {
     "choppingBlock": {
-      "ver": "1.0.6",
+      "ver": "1.0.4",
       "uuid": "a94200e3-d572-46db-8b7c-84ba674a51d7",
-      "importer": "sprite-frame",
       "rawTextureUuid": "cf72446f-5789-41a4-a124-2ee68c96cf6b",
       "trimType": "custom",
       "trimThreshold": 1,

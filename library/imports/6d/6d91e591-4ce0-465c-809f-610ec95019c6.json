@@ -82,7 +82,7 @@
           },
           "depthStencilState": {
             "depthTest": true,
-            "depthWrite": false
+            "depthWrite": true
           },
           "properties": {
             "diffuseTexture": {

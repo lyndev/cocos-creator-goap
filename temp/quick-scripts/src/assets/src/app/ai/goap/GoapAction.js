@@ -15,9 +15,9 @@ exports.GoapAction = void 0;
 var GoapAction = /** @class */ (function () {
     function GoapAction() {
         this.inRange = false;
-        /* The cost of performing the action.
-         * Figure out a weight that suits the action.
-         * Changing it will affect what actions are chosen during planning.*/
+        /* 执行动作的成本。
+        * 找出适合动作的重量。
+        * 更改它将影响在计划期间选择的操作。*/
         this.cost = 1;
         this.preconditions = new Map();
         this.effects = new Map();
