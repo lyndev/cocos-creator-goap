@@ -13,8 +13,7 @@ export class GotoEquipmentAction extends GoapAction {
 	public constructor() {
 		super();
 		this.addPrecondition(ActionDataStatus.isEquipOk, false); // we need a tool to do this
-		this.addPrecondition(ActionDataStatus.isEatOk, true); // we need a tool to do this
-		this.addEffect(ActionDataStatus.isEatOk, false);
+		this.addPrecondition(ActionDataStatus.isCanOutfire, true); // we need a tool to do this
 		this.addEffect(ActionDataStatus.isEquipOk, true);
 	}
 
@@ -67,7 +66,7 @@ export class GotoEquipmentAction extends GoapAction {
 			this.startTime = TimeUtil.getTime();
 
 		if (TimeUtil.getTime() - this.startTime > this.workDuration) {
-			entity.memory.set(ActionDataStatus.isEquipOk, true)
+			//entity.memory.set(ActionDataStatus.isEquipOk, true)
 			this.bDone = true
 		}
 		return true;

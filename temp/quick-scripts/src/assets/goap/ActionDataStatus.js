@@ -9,9 +9,10 @@ var ActionDataStatus = /** @class */ (function () {
     function ActionDataStatus() {
     }
     ActionDataStatus.isTolietOk = "isTolietOk";
-    ActionDataStatus.isEatOk = "isEatOk";
+    ActionDataStatus.isCanOutfire = "isCanOutfire";
     ActionDataStatus.isEquipOk = "isEquipOk";
     ActionDataStatus.isFireOk = "isFireOk";
+    ActionDataStatus.isSleepOk = "isSleepOk";
     ActionDataStatus.outFire = "outFire";
     return ActionDataStatus;
 }());

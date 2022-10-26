@@ -65,7 +65,7 @@ export class GotoToiletAction extends GoapAction {
 			this.startTime = TimeUtil.getTime();
 
 		if (TimeUtil.getTime() - this.startTime > this.workDuration) {
-			entity.memory.set(ActionDataStatus.isTolietOk, true)
+			//entity.memory.set(ActionDataStatus.isTolietOk, true)
 			this.bDone = true
 		}
 		return true;

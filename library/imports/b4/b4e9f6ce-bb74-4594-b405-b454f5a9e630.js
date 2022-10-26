@@ -7,7 +7,7 @@ var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
         return extendStatics(d, b);
     };
     return function (d, b) {
@@ -29,9 +29,10 @@ var GotoEatAction = /** @class */ (function (_super) {
         _this.bDone = false;
         _this.startTime = 0;
         _this.workDuration = 2; // seconds
+        _this.cost = 2;
         _this.addPrecondition(ActionDataStatus_1.ActionDataStatus.isTolietOk, true); // we need a tool to do this
-        _this.addPrecondition(ActionDataStatus_1.ActionDataStatus.isEatOk, false); // we need a tool to do this
-        _this.addEffect(ActionDataStatus_1.ActionDataStatus.isEatOk, true);
+        _this.addPrecondition(ActionDataStatus_1.ActionDataStatus.isCanOutfire, false); // we need a tool to do this
+        _this.addEffect(ActionDataStatus_1.ActionDataStatus.isCanOutfire, true);
         _this.addEffect(ActionDataStatus_1.ActionDataStatus.isTolietOk, false);
         return _this;
     }
@@ -77,7 +78,7 @@ var GotoEatAction = /** @class */ (function (_super) {
         if (this.startTime == 0)
             this.startTime = TimeUtil_1.default.getTime();
         if (TimeUtil_1.default.getTime() - this.startTime > this.workDuration) {
-            entity.memory.set(ActionDataStatus_1.ActionDataStatus.isEatOk, true);
+            //entity.memory.set(ActionDataStatus.isCanOutfire, true)
             this.bDone = true;
         }
         return true;

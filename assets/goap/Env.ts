@@ -3,6 +3,7 @@ import { Environment } from "../src/app/gamedata/Environment";
 import Eating from "./Eating";
 import Equip from "./Equip";
 import Fire from "./Fire";
+import Sleep from "./Sleep";
 import Toilet from "./Toilet";
 
 const { ccclass, property } = cc._decorator;
@@ -21,10 +22,14 @@ export default class Env extends cc.Component {
     @property(Eating)
     eating: Toilet = null
 
+    @property(Sleep)
+    sleep: Toilet = null
+
     start() {
         Environment.toiletTarget = this.toilet
         Environment.fireTarget = this.fire
         Environment.eatingTarget = this.eating
         Environment.equipTarget = this.equip
+        Environment.sleepTarget = this.sleep
     }
 }

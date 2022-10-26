@@ -16,6 +16,10 @@ export class GotoFireAction extends GoapAction {
 		this.addPrecondition(ActionDataStatus.isEquipOk, true); // we need a tool to do this
 		this.addEffect(ActionDataStatus.outFire, true);
 		this.addEffect(ActionDataStatus.isEquipOk, false)
+		this.addEffect(ActionDataStatus.isTolietOk, false)
+		this.addEffect(ActionDataStatus.isEquipOk, false)
+		this.addEffect(ActionDataStatus.isFireOk, false)
+		this.addEffect(ActionDataStatus.isCanOutfire, false)
 	}
 
 	public reset(): void {
@@ -67,12 +71,11 @@ export class GotoFireAction extends GoapAction {
 			this.startTime = TimeUtil.getTime();
 
 		if (TimeUtil.getTime() - this.startTime > this.workDuration) {
-			entity.memory.set(ActionDataStatus.isFireOk, true)
 			this.bDone = true
-			entity.memory.set(ActionDataStatus.isTolietOk, false)
-			entity.memory.set(ActionDataStatus.isEatOk, false)
-			entity.memory.set(ActionDataStatus.isEquipOk, false)
-			entity.memory.set(ActionDataStatus.isFireOk, false)
+			// entity.memory.set(ActionDataStatus.isTolietOk, false)
+			// entity.memory.set(ActionDataStatus.isEatOk, false)
+			// entity.memory.set(ActionDataStatus.isEquipOk, false)
+			// entity.memory.set(ActionDataStatus.isFireOk, false)
 		}
 		return true;
 	}

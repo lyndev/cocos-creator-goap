@@ -7,7 +7,7 @@ var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
         return extendStatics(d, b);
     };
     return function (d, b) {
@@ -30,8 +30,7 @@ var GotoEquipmentAction = /** @class */ (function (_super) {
         _this.startTime = 0;
         _this.workDuration = 2; // seconds
         _this.addPrecondition(ActionDataStatus_1.ActionDataStatus.isEquipOk, false); // we need a tool to do this
-        _this.addPrecondition(ActionDataStatus_1.ActionDataStatus.isEatOk, true); // we need a tool to do this
-        _this.addEffect(ActionDataStatus_1.ActionDataStatus.isEatOk, false);
+        _this.addPrecondition(ActionDataStatus_1.ActionDataStatus.isCanOutfire, true); // we need a tool to do this
         _this.addEffect(ActionDataStatus_1.ActionDataStatus.isEquipOk, true);
         return _this;
     }
@@ -77,7 +76,7 @@ var GotoEquipmentAction = /** @class */ (function (_super) {
         if (this.startTime == 0)
             this.startTime = TimeUtil_1.default.getTime();
         if (TimeUtil_1.default.getTime() - this.startTime > this.workDuration) {
-            entity.memory.set(ActionDataStatus_1.ActionDataStatus.isEquipOk, true);
+            //entity.memory.set(ActionDataStatus.isEquipOk, true)
             this.bDone = true;
         }
         return true;

@@ -7,7 +7,7 @@ var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
         return extendStatics(d, b);
     };
     return function (d, b) {
@@ -40,9 +40,10 @@ var Entity = /** @class */ (function (_super) {
     Entity.prototype.init = function () {
         this.memory = new DataMemory_1.default();
         this.memory.set(ActionDataStatus_1.ActionDataStatus.isTolietOk, false);
-        this.memory.set(ActionDataStatus_1.ActionDataStatus.isEatOk, false);
+        this.memory.set(ActionDataStatus_1.ActionDataStatus.isCanOutfire, false);
         this.memory.set(ActionDataStatus_1.ActionDataStatus.isEquipOk, false);
         this.memory.set(ActionDataStatus_1.ActionDataStatus.isFireOk, false);
+        this.memory.set(ActionDataStatus_1.ActionDataStatus.isSleepOk, false);
         this.goapAgent = new GoapAgent_1.GoapAgent(this);
     };
     Entity.prototype.getAvaliableActions = function () {
@@ -58,9 +59,10 @@ var Entity = /** @class */ (function (_super) {
     Entity.prototype.getWorldState = function () {
         var worldData = new Map();
         worldData.set(ActionDataStatus_1.ActionDataStatus.isTolietOk, this.memory.get(ActionDataStatus_1.ActionDataStatus.isTolietOk));
-        worldData.set(ActionDataStatus_1.ActionDataStatus.isEatOk, this.memory.get(ActionDataStatus_1.ActionDataStatus.isEatOk));
+        worldData.set(ActionDataStatus_1.ActionDataStatus.isCanOutfire, this.memory.get(ActionDataStatus_1.ActionDataStatus.isCanOutfire));
         worldData.set(ActionDataStatus_1.ActionDataStatus.isEquipOk, this.memory.get(ActionDataStatus_1.ActionDataStatus.isEquipOk));
         worldData.set(ActionDataStatus_1.ActionDataStatus.isFireOk, this.memory.get(ActionDataStatus_1.ActionDataStatus.isFireOk));
+        worldData.set(ActionDataStatus_1.ActionDataStatus.isSleepOk, this.memory.get(ActionDataStatus_1.ActionDataStatus.isSleepOk));
         return worldData;
     };
     Entity.prototype.planFailed = function (failedGoal) {

@@ -19,9 +19,10 @@ export abstract default class Entity extends cc.Component implements IGoap {
     public init() {
         this.memory = new DataMemory()
         this.memory.set(ActionDataStatus.isTolietOk, false)
-        this.memory.set(ActionDataStatus.isEatOk, false)
+        this.memory.set(ActionDataStatus.isCanOutfire, false)
         this.memory.set(ActionDataStatus.isEquipOk, false)
         this.memory.set(ActionDataStatus.isFireOk, false)
+        this.memory.set(ActionDataStatus.isSleepOk, false)
         this.goapAgent = new GoapAgent(this);
     }
 
@@ -40,9 +41,10 @@ export abstract default class Entity extends cc.Component implements IGoap {
     getWorldState(): Map<string, Object> {
         let worldData: Map<string, Object> = new Map<string, Object>();
         worldData.set(ActionDataStatus.isTolietOk, this.memory.get(ActionDataStatus.isTolietOk));
-        worldData.set(ActionDataStatus.isEatOk, this.memory.get(ActionDataStatus.isEatOk));
+        worldData.set(ActionDataStatus.isCanOutfire, this.memory.get(ActionDataStatus.isCanOutfire));
         worldData.set(ActionDataStatus.isEquipOk, this.memory.get(ActionDataStatus.isEquipOk));
         worldData.set(ActionDataStatus.isFireOk, this.memory.get(ActionDataStatus.isFireOk));
+        worldData.set(ActionDataStatus.isSleepOk, this.memory.get(ActionDataStatus.isSleepOk));
         return worldData;
     }
 

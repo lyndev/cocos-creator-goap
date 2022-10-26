@@ -10,11 +10,13 @@ export class GotoEatAction extends GoapAction {
 	private bDone: boolean = false
 	private startTime: number = 0;
 	private workDuration: number = 2; // seconds
+	public cost: number = 2
 	public constructor() {
 		super();
 		this.addPrecondition(ActionDataStatus.isTolietOk, true); // we need a tool to do this
-		this.addPrecondition(ActionDataStatus.isEatOk, false); // we need a tool to do this
-		this.addEffect(ActionDataStatus.isEatOk, true);
+		this.addPrecondition(ActionDataStatus.isCanOutfire, false); // we need a tool to do this
+		
+		this.addEffect(ActionDataStatus.isCanOutfire, true);
 		this.addEffect(ActionDataStatus.isTolietOk, false);
 	}
 
@@ -67,7 +69,7 @@ export class GotoEatAction extends GoapAction {
 			this.startTime = TimeUtil.getTime();
 
 		if (TimeUtil.getTime() - this.startTime > this.workDuration) {
-			entity.memory.set(ActionDataStatus.isEatOk, true)
+			//entity.memory.set(ActionDataStatus.isCanOutfire, true)
 			this.bDone = true
 		}
 		return true;

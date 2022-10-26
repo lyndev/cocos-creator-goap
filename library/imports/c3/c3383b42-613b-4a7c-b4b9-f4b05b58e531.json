@@ -1,0 +1,7 @@
+{
+  "__type__": "cc.TextAsset",
+  "_name": "测试2",
+  "_objFlags": 0,
+  "_native": "",
+  "text": "1 随机移动\r\n2 停留n秒\r\n"
+}

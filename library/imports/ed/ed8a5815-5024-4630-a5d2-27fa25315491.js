@@ -7,7 +7,7 @@ var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
         return extendStatics(d, b);
     };
     return function (d, b) {
@@ -29,6 +29,7 @@ var GotoToiletAction_1 = require("./GotoToiletAction");
 var GotoEatAction_1 = require("./GotoEatAction");
 var GotoEquipmentAction_1 = require("./GotoEquipmentAction");
 var GotoFireAction_1 = require("./GotoFireAction");
+var GotSleepAction_1 = require("./GotSleepAction");
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
 var FireNpc = /** @class */ (function (_super) {
     __extends(FireNpc, _super);
@@ -36,6 +37,7 @@ var FireNpc = /** @class */ (function (_super) {
         var _this = _super.call(this) || this;
         _this.toInitAvaliableActions([
             GotoToiletAction_1.GotoToiletAction,
+            GotSleepAction_1.GotSleepAction,
             GotoEatAction_1.GotoEatAction,
             GotoEquipmentAction_1.GotoEquipmentAction,
             GotoFireAction_1.GotoFireAction

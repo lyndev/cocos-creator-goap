@@ -7,7 +7,7 @@ var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
         return extendStatics(d, b);
     };
     return function (d, b) {
@@ -27,6 +27,7 @@ var Environment_1 = require("../src/app/gamedata/Environment");
 var Eating_1 = require("./Eating");
 var Equip_1 = require("./Equip");
 var Fire_1 = require("./Fire");
+var Sleep_1 = require("./Sleep");
 var Toilet_1 = require("./Toilet");
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
 var Env = /** @class */ (function (_super) {
@@ -37,6 +38,7 @@ var Env = /** @class */ (function (_super) {
         _this.fire = null;
         _this.equip = null;
         _this.eating = null;
+        _this.sleep = null;
         return _this;
     }
     Env.prototype.start = function () {
@@ -44,6 +46,7 @@ var Env = /** @class */ (function (_super) {
         Environment_1.Environment.fireTarget = this.fire;
         Environment_1.Environment.eatingTarget = this.eating;
         Environment_1.Environment.equipTarget = this.equip;
+        Environment_1.Environment.sleepTarget = this.sleep;
     };
     __decorate([
         property(Toilet_1.default)
@@ -57,6 +60,9 @@ var Env = /** @class */ (function (_super) {
     __decorate([
         property(Eating_1.default)
     ], Env.prototype, "eating", void 0);
+    __decorate([
+        property(Sleep_1.default)
+    ], Env.prototype, "sleep", void 0);
     Env = __decorate([
         ccclass
     ], Env);

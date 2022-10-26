@@ -1,6 +1,7 @@
 import Eating from "../../../goap/Eating";
 import Equip from "../../../goap/Equip";
 import Fire from "../../../goap/Fire";
+import Sleep from "../../../goap/Sleep";
 import Toilet from "../../../goap/Toilet";
 import { ChoppingBlockComponent } from "./ChoppingBlockComponent";
 import { ForgeComponent } from "./ForgeComponent";
@@ -19,4 +20,5 @@ export class Environment {
 	public static fireTarget:Fire;
 	public static eatingTarget:Eating;
 	public static equipTarget:Equip;
+	public static sleepTarget:Sleep
 }

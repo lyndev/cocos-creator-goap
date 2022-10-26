@@ -5,14 +5,16 @@ import { GotoToiletAction } from './GotoToiletAction';
 import { GotoEatAction } from './GotoEatAction';
 import { GotoEquipmentAction } from './GotoEquipmentAction';
 import { GotoFireAction } from './GotoFireAction';
+import { GotSleepAction } from './GotSleepAction';
 
 const { ccclass, property } = cc._decorator;
 @ccclass
 export default class FireNpc extends Entity {
-    constructor(){
+    constructor() {
         super()
         this.toInitAvaliableActions([
             GotoToiletAction
+            , GotSleepAction
             , GotoEatAction
             , GotoEquipmentAction
             , GotoFireAction
@@ -22,11 +24,11 @@ export default class FireNpc extends Entity {
 
     public createGoalState(): Map<string, Object> {
         let goal = new Map<string, Object>();
-		goal.set(ActionDataStatus.outFire​​, true);
-		return goal;
+        goal.set(ActionDataStatus.outFire, true);
+        return goal;
     }
 
-    update(dt){
+    update(dt) {
         this.updateTimer(dt)
     }
 }
