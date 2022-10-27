@@ -33,8 +33,6 @@ export default class GoapOutFire2 implements IGoap {
         return goal
     }
 
-
-
     getWorldState(): Map<string, Object> {
         let worldData: Map<string, Object> = new Map<string, Object>();
         worldData.set(ActionDataStatus.isTolietOk, this.memory.get(ActionDataStatus.isTolietOk));

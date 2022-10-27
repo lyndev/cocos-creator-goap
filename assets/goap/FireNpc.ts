@@ -19,9 +19,14 @@ export default class FireNpc extends GoapAgent {
             , GotoEquipmentAction
             , GotoFireAction
         ])
+        this.init()
         this.setGoap(goap)
-        this.setCurrentActions(goap.getAvaliableActions())
-        super.onLoad()
+        let actions = goap.getAvaliableActions()
+        for (let index = 0; index < actions.length; index++) {
+            const element = actions[index];
+            this.addAction(element)
+        }
+
     }
 
 

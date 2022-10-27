@@ -16,13 +16,12 @@ import { IGoap } from "./IGoap";
  * @Last Modified time: 2018-11-04 17:41:31
  */
 export class GoapAgent extends cc.Component {
-	public onLoad(): void {
+	public init(): void {
 		this.initState();
 		this.planner = new GoapPlanner();
 		this.availableActions = [];
 		this.currentActions = [];
 		this.stateMgr.changeState(StateEnum.StateIdle);
-		this.loadActions();
 	}
 
 	private stateMgr: StateManager;

@@ -46,9 +46,13 @@ var FireNpc = /** @class */ (function (_super) {
             GotoEquipmentAction_1.GotoEquipmentAction,
             GotoFireAction_1.GotoFireAction
         ]);
+        this.init();
         this.setGoap(goap);
-        this.setCurrentActions(goap.getAvaliableActions());
-        _super.prototype.onLoad.call(this);
+        var actions = goap.getAvaliableActions();
+        for (var index = 0; index < actions.length; index++) {
+            var element = actions[index];
+            this.addAction(element);
+        }
     };
     FireNpc.prototype.createGoalState = function () {
         var goal = new Map();

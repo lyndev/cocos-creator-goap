@@ -36,13 +36,12 @@ var GoapAgent = /** @class */ (function (_super) {
     function GoapAgent() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    GoapAgent.prototype.onLoad = function () {
+    GoapAgent.prototype.init = function () {
         this.initState();
         this.planner = new GoapPlanner_1.GoapPlanner();
         this.availableActions = [];
         this.currentActions = [];
         this.stateMgr.changeState(StateEnum_1.StateEnum.StateIdle);
-        this.loadActions();
     };
     GoapAgent.prototype.getGoap = function () {
         return this.goap;
