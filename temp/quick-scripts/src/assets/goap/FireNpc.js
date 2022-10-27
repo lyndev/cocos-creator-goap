@@ -24,40 +24,45 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var ActionDataStatus_1 = require("./ActionDataStatus");
-var Entity_1 = require("./Entity");
 var GotoToiletAction_1 = require("./GotoToiletAction");
 var GotoEatAction_1 = require("./GotoEatAction");
 var GotoEquipmentAction_1 = require("./GotoEquipmentAction");
 var GotoFireAction_1 = require("./GotoFireAction");
 var GotSleepAction_1 = require("./GotSleepAction");
+var GoapAgent_1 = require("../src/app/ai/goap/GoapAgent");
+var GoapOutFire2_1 = require("./goaps/GoapOutFire2");
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
 var FireNpc = /** @class */ (function (_super) {
     __extends(FireNpc, _super);
     function FireNpc() {
-        var _this = _super.call(this) || this;
-        _this.toInitAvaliableActions([
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    FireNpc.prototype.onLoad = function () {
+        var goap = new GoapOutFire2_1.default();
+        goap.initAvaliableActions([
             GotoToiletAction_1.GotoToiletAction,
             GotSleepAction_1.GotSleepAction,
             GotoEatAction_1.GotoEatAction,
             GotoEquipmentAction_1.GotoEquipmentAction,
             GotoFireAction_1.GotoFireAction
         ]);
-        _this.init();
-        return _this;
-    }
+        this.setGoap(goap);
+        this.setCurrentActions(goap.getAvaliableActions());
+        _super.prototype.onLoad.call(this);
+    };
     FireNpc.prototype.createGoalState = function () {
         var goal = new Map();
         goal.set(ActionDataStatus_1.ActionDataStatus.outFire, true);
         return goal;
     };
     FireNpc.prototype.update = function (dt) {
-        this.updateTimer(dt);
+        _super.prototype.update.call(this, dt);
     };
     FireNpc = __decorate([
         ccclass
     ], FireNpc);
     return FireNpc;
-}(Entity_1.default));
+}(GoapAgent_1.GoapAgent));
 exports.default = FireNpc;
 
 cc._RF.pop();

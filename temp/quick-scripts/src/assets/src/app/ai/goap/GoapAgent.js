@@ -3,6 +3,19 @@ cc._RF.push(module, '1f1fa9m67hDyIz3E7rLr/eL', 'GoapAgent');
 // src/app/ai/goap/GoapAgent.ts
 
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GoapAgent = void 0;
 var StateEnum_1 = require("../fsm/state/StateEnum");
@@ -18,18 +31,24 @@ var GoapPlanner_1 = require("./GoapPlanner");
  * @Last Modified by: RannarYang
  * @Last Modified time: 2018-11-04 17:41:31
  */
-var GoapAgent = /** @class */ (function () {
-    function GoapAgent(owner) {
-        this.owner = owner;
+var GoapAgent = /** @class */ (function (_super) {
+    __extends(GoapAgent, _super);
+    function GoapAgent() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    GoapAgent.prototype.onLoad = function () {
         this.initState();
         this.planner = new GoapPlanner_1.GoapPlanner();
         this.availableActions = [];
         this.currentActions = [];
         this.stateMgr.changeState(StateEnum_1.StateEnum.StateIdle);
         this.loadActions();
-    }
-    GoapAgent.prototype.getOwner = function () {
-        return this.owner;
+    };
+    GoapAgent.prototype.getGoap = function () {
+        return this.goap;
+    };
+    GoapAgent.prototype.setGoap = function (v) {
+        this.goap = v;
     };
     GoapAgent.prototype.getPlanner = function () {
         return this.planner;
@@ -85,7 +104,7 @@ var GoapAgent = /** @class */ (function () {
         return this.currentActions.length > 0;
     };
     GoapAgent.prototype.loadActions = function () {
-        var actions = this.owner.getAvaliableActions();
+        var actions = this.getAvaliableActions();
         for (var _i = 0, actions_1 = actions; _i < actions_1.length; _i++) {
             var action = actions_1[_i];
             this.availableActions.push(action);
@@ -123,7 +142,7 @@ var GoapAgent = /** @class */ (function () {
         return "" + action.constructor.name;
     };
     return GoapAgent;
-}());
+}(cc.Component));
 exports.GoapAgent = GoapAgent;
 
 cc._RF.pop();

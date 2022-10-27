@@ -33,7 +33,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Labourer = void 0;
 var ActionStatus_1 = require("../../ai/goap/ActionStatus");
 var GoapAgent_1 = require("../../ai/goap/GoapAgent");
-var VGameObject_1 = require("../../base/VGameObject");
 var GameDataManager_1 = require("../../data/GameDataManager");
 var LabourerType_1 = require("../../data/LabourerType");
 var ToolComponent_1 = require("../ToolComponent");
@@ -72,11 +71,11 @@ var Labourer = /** @class */ (function (_super) {
             this.pickUpTool();
         }
         this.initAvaliableActions();
-        this.goapAgent = new GoapAgent_1.GoapAgent(this);
+        //this.goapAgent = new GoapAgent(this);
     };
     Labourer.prototype.initAvaliableActions = function () { };
     Labourer.prototype.update = function (delta) {
-        this.goapAgent.update(delta);
+        this.update(delta);
     };
     Labourer.prototype.getWorldState = function () {
         var worldData = new Map();
@@ -175,7 +174,7 @@ var Labourer = /** @class */ (function (_super) {
         ccclass
     ], Labourer);
     return Labourer;
-}(VGameObject_1.VGameObject));
+}(GoapAgent_1.GoapAgent));
 exports.Labourer = Labourer;
 
 cc._RF.pop();

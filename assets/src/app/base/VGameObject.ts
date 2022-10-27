@@ -1,6 +1,10 @@
+
 const { ccclass, property } = cc._decorator;
 @ccclass
 export class VGameObject extends cc.Component {
+	createGoalState(): Map<string, Object> {
+		throw new Error("Method not implemented.");
+	}
 	public moveTo(target: VGameObject, step: number) {
 		let curDis = this.distanceSquare(target)
 		let minDis = step * step

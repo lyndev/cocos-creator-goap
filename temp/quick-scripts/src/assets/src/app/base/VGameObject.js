@@ -30,6 +30,9 @@ var VGameObject = /** @class */ (function (_super) {
     function VGameObject() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
+    VGameObject.prototype.createGoalState = function () {
+        throw new Error("Method not implemented.");
+    };
     VGameObject.prototype.moveTo = function (target, step) {
         var curDis = this.distanceSquare(target);
         var minDis = step * step;

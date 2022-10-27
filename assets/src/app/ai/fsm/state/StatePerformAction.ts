@@ -5,21 +5,20 @@ import { StateBase } from "./StateBase";
 import { StateEnum } from "./StateEnum";
 
 export class StatePerformAction extends StateBase {
-    protected _owner: GoapAgent
-
+    public onEnter() {
+    }
     /**
      * 状态更新 
      * @return 
      */
     public onUpdate(timeStamp: number): void {
-        // perform the action
-        let iGoap: IGoap = this.owner.getOwner();
-
-        if (!this.owner.hasActionPlan()) {
+        let owner = this.owner as GoapAgent
+        let goap: IGoap = owner.getGoap();
+        if (!owner.hasActionPlan()) {
             // no actions to perform
             console.log("Done actions");
             this.owner.changeState(StateEnum.StateIdle);
-            iGoap.actionsFinished();
+            goap.actionsFinished();
             return;
         }
         let action: GoapAction = this.owner.peekCurrentActions();
@@ -36,12 +35,12 @@ export class StatePerformAction extends StateBase {
 
             if (inRange) {
                 // we are in range, so perform the action
-                let success: boolean = action.perform(iGoap);
+                let success: boolean = action.perform(this.owner);
 
                 if (!success) {
                     // action failed, we need to plan again
                     this.owner.changeState(StateEnum.StateIdle);
-                    iGoap.planAborted(action);
+                    goap.planAborted(action);
                 }
             } else {
                 // we need to move there first
@@ -51,7 +50,7 @@ export class StatePerformAction extends StateBase {
         } else {
             // no actions left, move to Plan state
             this.owner.changeState(StateEnum.StateIdle);
-            iGoap.actionsFinished();
+            goap.actionsFinished();
         }
     }
 }

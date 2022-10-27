@@ -29,7 +29,7 @@ var GotoEatAction = /** @class */ (function (_super) {
         _this.bDone = false;
         _this.startTime = 0;
         _this.workDuration = 2; // seconds
-        _this.cost = 2;
+        _this.cost = 1;
         _this.addPrecondition(ActionDataStatus_1.ActionDataStatus.isTolietOk, true); // we need a tool to do this
         _this.addPrecondition(ActionDataStatus_1.ActionDataStatus.isCanOutfire, false); // we need a tool to do this
         _this.addEffect(ActionDataStatus_1.ActionDataStatus.isCanOutfire, true);
@@ -47,6 +47,7 @@ var GotoEatAction = /** @class */ (function (_super) {
         return true;
     };
     GotoEatAction.prototype.checkProceduralPrecondition = function (agent) {
+        return false;
         this.target = Environment_1.Environment.eatingTarget;
         return this.target != null;
         // // TODO:find the nearest tree that we can chop
@@ -73,8 +74,7 @@ var GotoEatAction = /** @class */ (function (_super) {
         // this.target = closest;
         // return closest != null;
     };
-    GotoEatAction.prototype.perform = function (iGoap) {
-        var entity = iGoap;
+    GotoEatAction.prototype.perform = function (agent) {
         if (this.startTime == 0)
             this.startTime = TimeUtil_1.default.getTime();
         if (TimeUtil_1.default.getTime() - this.startTime > this.workDuration) {

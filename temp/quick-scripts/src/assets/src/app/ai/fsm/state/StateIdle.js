@@ -32,27 +32,27 @@ var StateIdle = /** @class */ (function (_super) {
      * @return
      */
     StateIdle.prototype.onUpdate = function (timeStamp) {
-        var iGoap = this.owner.getOwner();
-        var planner = this.owner.getPlanner();
-        var avaliableActions = this.owner.getAvaliableActions();
-        //console.log("avaliableActions: ", avaliableActions);
+        var owner = this.owner;
+        var goap = owner.getGoap();
+        var planner = owner.getPlanner();
+        var avaliableActions = owner.getAvaliableActions();
         // GOAP planning
         // get the world state and the goal we want to plan for
-        var worldState = iGoap.getWorldState();
-        var goal = iGoap.createGoalState();
+        var worldState = goap.getWorldState();
+        var goal = goap.createGoalState();
         // plan
-        var plan = planner.plan(iGoap, avaliableActions, worldState, goal);
+        var plan = planner.plan(owner, avaliableActions, worldState, goal);
         if (plan != null) {
             // we have a plan, hooray!
-            this.owner.setCurrentActions(plan);
-            iGoap.planFound(goal, plan);
+            owner.setCurrentActions(plan);
+            goap.planFound(goal, plan);
             // move to PerformAction state
-            this.owner.changeState(StateEnum_1.StateEnum.StatePerformAction);
+            owner.changeState(StateEnum_1.StateEnum.StatePerformAction);
         }
         else {
             //console.log("Failed Plan");
-            iGoap.planFailed(goal);
-            this.owner.changeState(StateEnum_1.StateEnum.StateIdle);
+            goap.planFailed(goal);
+            owner.changeState(StateEnum_1.StateEnum.StateIdle);
         }
     };
     return StateIdle;

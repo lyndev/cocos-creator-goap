@@ -1,5 +1,7 @@
+import Entity from "../../../../goap/Entity";
 import { VGameObject } from "../../base/VGameObject";
 import { ActionStatus } from "./ActionStatus";
+import { GoapAgent } from "./GoapAgent";
 import { IGoap } from "./IGoap";
 
 /*
@@ -20,7 +22,7 @@ export abstract class GoapAction {
 	* 更改它将影响在计划期间选择的操作。*/
 	public cost: number = 1;
 
-	
+
 	/**
 	* 一个动作通常必须在一个对象上执行。这就是那个对象。可以为空。 */
 	public target: VGameObject;
@@ -49,7 +51,7 @@ export abstract class GoapAction {
 	 * Procedurally check if this action can run. Not all actions
 	 * will need this, but some might.
 	 */
-	abstract checkProceduralPrecondition(agent: VGameObject): boolean;
+	abstract checkProceduralPrecondition(agent: GoapAgent): boolean;
 
 	/**
 	 * Run the action.
@@ -57,7 +59,7 @@ export abstract class GoapAction {
 	 * if something happened and it can no longer perform. In this case
 	 * the action queue should clear out and the goal cannot be reached.
 	 */
-	abstract perform(iGoap: IGoap): boolean;
+	abstract perform(agent: GoapAgent): boolean;
 
 	/**
 	 * Does this action need to be within range of a target game object?

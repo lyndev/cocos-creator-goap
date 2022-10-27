@@ -15,14 +15,27 @@ import { IGoap } from "./IGoap";
  * @Last Modified by: RannarYang
  * @Last Modified time: 2018-11-04 17:41:31
  */
-export class GoapAgent {
+export class GoapAgent extends cc.Component {
+	public onLoad(): void {
+		this.initState();
+		this.planner = new GoapPlanner();
+		this.availableActions = [];
+		this.currentActions = [];
+		this.stateMgr.changeState(StateEnum.StateIdle);
+		this.loadActions();
+	}
 
 	private stateMgr: StateManager;
+	protected goap: IGoap;
 
-	private owner: IGoap;
-	public getOwner(): IGoap {
-		return this.owner;
+	public getGoap(): IGoap {
+		return this.goap;
 	}
+
+	public setGoap(v) {
+		this.goap = v
+	}
+
 	private planner: GoapPlanner;
 	public getPlanner(): GoapPlanner {
 		return this.planner;
@@ -48,15 +61,6 @@ export class GoapAgent {
 		return this.currentActions;
 	}
 
-	public constructor(owner: IGoap) {
-		this.owner = owner;
-		this.initState();
-		this.planner = new GoapPlanner();
-		this.availableActions = [];
-		this.currentActions = [];
-		this.stateMgr.changeState(StateEnum.StateIdle);
-		this.loadActions();
-	}
 	private initState() {
 		let stateMgr = this.stateMgr = new StateManager(this);
 		stateMgr.registerState(StateEnum.StateIdle, new StateIdle(this))
@@ -95,7 +99,7 @@ export class GoapAgent {
 	}
 
 	private loadActions() {
-		let actions: GoapAction[] = this.owner.getAvaliableActions();
+		let actions: GoapAction[] = this.getAvaliableActions();
 		for (let action of actions) {
 			this.availableActions.push(action);
 		}

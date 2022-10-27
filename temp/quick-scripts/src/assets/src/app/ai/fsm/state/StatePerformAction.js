@@ -25,18 +25,20 @@ var StatePerformAction = /** @class */ (function (_super) {
     function StatePerformAction() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
+    StatePerformAction.prototype.onEnter = function () {
+    };
     /**
      * 状态更新
      * @return
      */
     StatePerformAction.prototype.onUpdate = function (timeStamp) {
-        // perform the action
-        var iGoap = this.owner.getOwner();
-        if (!this.owner.hasActionPlan()) {
+        var owner = this.owner;
+        var goap = owner.getGoap();
+        if (!owner.hasActionPlan()) {
             // no actions to perform
             console.log("Done actions");
             this.owner.changeState(StateEnum_1.StateEnum.StateIdle);
-            iGoap.actionsFinished();
+            goap.actionsFinished();
             return;
         }
         var action = this.owner.peekCurrentActions();
@@ -50,11 +52,11 @@ var StatePerformAction = /** @class */ (function (_super) {
             var inRange = action.requiresInRange() ? action.isInRange() : true;
             if (inRange) {
                 // we are in range, so perform the action
-                var success = action.perform(iGoap);
+                var success = action.perform(this.owner);
                 if (!success) {
                     // action failed, we need to plan again
                     this.owner.changeState(StateEnum_1.StateEnum.StateIdle);
-                    iGoap.planAborted(action);
+                    goap.planAborted(action);
                 }
             }
             else {
@@ -66,7 +68,7 @@ var StatePerformAction = /** @class */ (function (_super) {
         else {
             // no actions left, move to Plan state
             this.owner.changeState(StateEnum_1.StateEnum.StateIdle);
-            iGoap.actionsFinished();
+            goap.actionsFinished();
         }
     };
     return StatePerformAction;

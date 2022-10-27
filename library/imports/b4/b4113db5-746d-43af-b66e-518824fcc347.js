@@ -28,6 +28,7 @@ var Eating_1 = require("./Eating");
 var Equip_1 = require("./Equip");
 var Fire_1 = require("./Fire");
 var Sleep_1 = require("./Sleep");
+var StoreA_1 = require("./StoreA");
 var Toilet_1 = require("./Toilet");
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
 var Env = /** @class */ (function (_super) {
@@ -39,6 +40,7 @@ var Env = /** @class */ (function (_super) {
         _this.equip = null;
         _this.eating = null;
         _this.sleep = null;
+        _this.storeA = null;
         return _this;
     }
     Env.prototype.start = function () {
@@ -47,6 +49,7 @@ var Env = /** @class */ (function (_super) {
         Environment_1.Environment.eatingTarget = this.eating;
         Environment_1.Environment.equipTarget = this.equip;
         Environment_1.Environment.sleepTarget = this.sleep;
+        Environment_1.Environment.storeA = this.storeA;
     };
     __decorate([
         property(Toilet_1.default)
@@ -63,6 +66,9 @@ var Env = /** @class */ (function (_super) {
     __decorate([
         property(Sleep_1.default)
     ], Env.prototype, "sleep", void 0);
+    __decorate([
+        property(StoreA_1.default)
+    ], Env.prototype, "storeA", void 0);
     Env = __decorate([
         ccclass
     ], Env);

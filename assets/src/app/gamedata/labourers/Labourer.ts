@@ -26,7 +26,7 @@ import { ToolComponent } from "../ToolComponent";
  */
 const { ccclass, property } = cc._decorator;
 @ccclass
-export class Labourer extends VGameObject implements IGoap {
+export class Labourer extends GoapAgent implements IGoap {
 	@property({ type: cc.Enum(LabourerType), displayName: "type" })
 	public labourerType: LabourerType = LabourerType.None;
 
@@ -60,12 +60,12 @@ export class Labourer extends VGameObject implements IGoap {
 			this.pickUpTool();
 		}
 		this.initAvaliableActions();
-		this.goapAgent = new GoapAgent(this);
+		//this.goapAgent = new GoapAgent(this);
 	}
 	protected initAvaliableActions() { }
 
 	public update(delta: number) {
-		this.goapAgent.update(delta);
+		this.update(delta);
 	}
 
 	public getWorldState(): Map<string, Object> {

@@ -6,6 +6,7 @@
  * @Last Modified time: 2018-07-05 17:35:31
  */
 
+import { GoapAgent } from "../goap/GoapAgent";
 import { StateBase } from "./state/StateBase";
 
 export class StateManager {
@@ -14,7 +15,7 @@ export class StateManager {
 	protected _stateDic: { [key: string]: StateBase };
 	protected _currentState: StateBase = null;
 	protected _lastState: StateBase = null;
-	protected _owner: any;
+	protected _owner: GoapAgent;
 
 	constructor(owner: any) {
 		this._stateDic = {};

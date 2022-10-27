@@ -6,10 +6,9 @@
  * @Last Modified time: 2018-11-04 18:04:36
  */
 
-import { Labourer } from "../../gamedata/labourers/Labourer";
 import { ActionStatus } from "./ActionStatus";
 import { GoapAction } from "./GoapAction";
-import { IGoap } from "./IGoap";
+import { GoapAgent } from "./GoapAgent";
 
 /**
  * Plans what actions can be completed in order to fulfill a goal state.
@@ -20,8 +19,7 @@ export class GoapPlanner {
 	 * Returns null if a plan could not be found, or a list of the actions
 	 * that must be performed, in order, to fulfill the goal.
 	 */
-	public plan(iGoap: IGoap, availableActions: GoapAction[], worldState: Map<ActionStatus, Object>, goal: Map<ActionStatus, Object>): GoapAction[] {
-		let labourer: Labourer = iGoap as Labourer;
+	public plan(agent: GoapAgent, availableActions: GoapAction[], worldState: Map<ActionStatus, Object>, goal: Map<ActionStatus, Object>): GoapAction[] {
 		// reset the actions so we can start fresh with them
 		for (let a of availableActions) {
 			a.doReset();
@@ -30,7 +28,7 @@ export class GoapPlanner {
 		// check what actions can run using their checkProceduralPrecondition
 		let usableActions: GoapAction[] = [];
 		for (let a of availableActions) {
-			if (a.checkProceduralPrecondition(labourer as Labourer)) {
+			if (a.checkProceduralPrecondition(agent)) {
 				usableActions.push(a);
 			}
 		}

@@ -25,13 +25,15 @@ var StateMove = /** @class */ (function (_super) {
     function StateMove() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
+    StateMove.prototype.onEnter = function () {
+    };
     /**
      * 状态更新
      * @return
      */
     StateMove.prototype.onUpdate = function (delta) {
-        var iGoap = this.owner.getOwner();
-        // move the game object
+        var owner = this.owner;
+        var goap = owner.getGoap();
         var action = this.owner.peekCurrentActions();
         if (action.requiresInRange() && action.target == null) {
             console.log("Fatal error: Action requires a target but has none. Planning failed. You did not assign the target in your Action.checkProceduralPrecondition()");
@@ -39,7 +41,7 @@ var StateMove = /** @class */ (function (_super) {
             return;
         }
         // get the agent to move itself
-        if (iGoap.moveAgent(action, delta)) {
+        if (goap.moveAgent(action, delta)) {
             this.owner.changeState(StateEnum_1.StateEnum.StatePerformAction);
         }
     };

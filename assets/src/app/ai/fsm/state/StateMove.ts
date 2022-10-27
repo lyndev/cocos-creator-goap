@@ -5,16 +5,15 @@ import { StateBase } from "./StateBase";
 import { StateEnum } from "./StateEnum";
 
 export class StateMove extends StateBase {
-    protected _owner: GoapAgent
+    public onEnter() {
+    }
     /**
      * 状态更新 
      * @return 
      */
     public onUpdate(delta: number): void {
-        let iGoap: IGoap = this.owner.getOwner();
-
-        // move the game object
-
+        let owner = this.owner as GoapAgent
+        let goap: IGoap = owner.getGoap();
         let action: GoapAction = this.owner.peekCurrentActions();
         if (action.requiresInRange() && action.target == null) {
             console.log("Fatal error: Action requires a target but has none. Planning failed. You did not assign the target in your Action.checkProceduralPrecondition()");
@@ -23,7 +22,7 @@ export class StateMove extends StateBase {
         }
 
         // get the agent to move itself
-        if (iGoap.moveAgent(action, delta)) {
+        if (goap.moveAgent(action, delta)) {
             this.owner.changeState(StateEnum.StatePerformAction);
         }
     }

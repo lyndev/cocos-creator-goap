@@ -1,10 +1,10 @@
 import { GoapAction } from "../src/app/ai/goap/GoapAction";
+import { GoapAgent } from "../src/app/ai/goap/GoapAgent";
 import { IGoap } from "../src/app/ai/goap/IGoap";
 import { VGameObject } from "../src/app/base/VGameObject";
 import { Environment } from "../src/app/gamedata/Environment";
 import TimeUtil from "../src/utils/TimeUtil";
 import { ActionDataStatus } from "./ActionDataStatus";
-import Entity from "./Entity";
 
 export class GotoToiletAction extends GoapAction {
 	private bDone: boolean = false
@@ -59,8 +59,7 @@ export class GotoToiletAction extends GoapAction {
 		// return closest != null;
 	}
 
-	public perform(iGoap: IGoap): boolean {
-		let entity = iGoap as Entity;
+	public perform(agent: GoapAgent): boolean {
 		if (this.startTime == 0)
 			this.startTime = TimeUtil.getTime();
 

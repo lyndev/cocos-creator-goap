@@ -23,8 +23,7 @@ var GoapPlanner = /** @class */ (function () {
      * Returns null if a plan could not be found, or a list of the actions
      * that must be performed, in order, to fulfill the goal.
      */
-    GoapPlanner.prototype.plan = function (iGoap, availableActions, worldState, goal) {
-        var labourer = iGoap;
+    GoapPlanner.prototype.plan = function (agent, availableActions, worldState, goal) {
         // reset the actions so we can start fresh with them
         for (var _i = 0, availableActions_1 = availableActions; _i < availableActions_1.length; _i++) {
             var a = availableActions_1[_i];
@@ -34,7 +33,7 @@ var GoapPlanner = /** @class */ (function () {
         var usableActions = [];
         for (var _a = 0, availableActions_2 = availableActions; _a < availableActions_2.length; _a++) {
             var a = availableActions_2[_a];
-            if (a.checkProceduralPrecondition(labourer)) {
+            if (a.checkProceduralPrecondition(agent)) {
                 usableActions.push(a);
             }
         }

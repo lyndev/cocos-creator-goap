@@ -28,7 +28,7 @@ var GotSleepAction = /** @class */ (function (_super) {
         var _this = _super.call(this) || this;
         _this.bDone = false;
         _this.startTime = 0;
-        _this.workDuration = 2; // seconds
+        _this.workDuration = 1; // seconds
         _this.cost = 1;
         _this.addPrecondition(ActionDataStatus_1.ActionDataStatus.isTolietOk, true); // we need a tool to do this
         _this.addPrecondition(ActionDataStatus_1.ActionDataStatus.isCanOutfire, false); // we need a tool to do this
@@ -72,8 +72,7 @@ var GotSleepAction = /** @class */ (function (_super) {
         // this.target = closest;
         // return closest != null;
     };
-    GotSleepAction.prototype.perform = function (iGoap) {
-        var entity = iGoap;
+    GotSleepAction.prototype.perform = function (agent) {
         if (this.startTime == 0)
             this.startTime = TimeUtil_1.default.getTime();
         if (TimeUtil_1.default.getTime() - this.startTime > this.workDuration) {

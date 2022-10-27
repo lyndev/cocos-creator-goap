@@ -1,4 +1,5 @@
 import { GoapAction } from "../src/app/ai/goap/GoapAction";
+import { GoapAgent } from "../src/app/ai/goap/GoapAgent";
 import { IGoap } from "../src/app/ai/goap/IGoap";
 import { VGameObject } from "../src/app/base/VGameObject";
 import { Environment } from "../src/app/gamedata/Environment";
@@ -10,12 +11,12 @@ export class GotoEatAction extends GoapAction {
 	private bDone: boolean = false
 	private startTime: number = 0;
 	private workDuration: number = 2; // seconds
-	public cost: number = 2
+	public cost: number = 1
 	public constructor() {
 		super();
 		this.addPrecondition(ActionDataStatus.isTolietOk, true); // we need a tool to do this
 		this.addPrecondition(ActionDataStatus.isCanOutfire, false); // we need a tool to do this
-		
+
 		this.addEffect(ActionDataStatus.isCanOutfire, true);
 		this.addEffect(ActionDataStatus.isTolietOk, false);
 	}
@@ -32,7 +33,9 @@ export class GotoEatAction extends GoapAction {
 	public requiresInRange() {
 		return true;
 	}
-	public checkProceduralPrecondition(agent: VGameObject): boolean {
+
+	public checkProceduralPrecondition(agent: Entity): boolean {
+		return false
 		this.target = Environment.eatingTarget;
 		return this.target != null
 		// // TODO:find the nearest tree that we can chop
@@ -63,8 +66,7 @@ export class GotoEatAction extends GoapAction {
 		// return closest != null;
 	}
 
-	public perform(iGoap: IGoap): boolean {
-		let entity = iGoap as Entity;
+	public perform(agent: GoapAgent): boolean {
 		if (this.startTime == 0)
 			this.startTime = TimeUtil.getTime();
 

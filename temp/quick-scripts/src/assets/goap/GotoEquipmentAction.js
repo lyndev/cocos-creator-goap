@@ -71,8 +71,7 @@ var GotoEquipmentAction = /** @class */ (function (_super) {
         // this.target = closest;
         // return closest != null;
     };
-    GotoEquipmentAction.prototype.perform = function (iGoap) {
-        var entity = iGoap;
+    GotoEquipmentAction.prototype.perform = function (agent) {
         if (this.startTime == 0)
             this.startTime = TimeUtil_1.default.getTime();
         if (TimeUtil_1.default.getTime() - this.startTime > this.workDuration) {
