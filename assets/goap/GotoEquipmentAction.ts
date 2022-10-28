@@ -13,7 +13,6 @@ export class GotoEquipmentAction extends GoapAction {
 	private workDuration: number = 2; // seconds
 	public constructor() {
 		super();
-		this.addPrecondition(ActionDataStatus.isEquipOk, false); // we need a tool to do this
 		this.addPrecondition(ActionDataStatus.isCanOutfire, true); // we need a tool to do this
 		this.addEffect(ActionDataStatus.isEquipOk, true);
 	}

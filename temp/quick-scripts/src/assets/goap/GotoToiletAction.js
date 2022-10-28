@@ -29,7 +29,6 @@ var GotoToiletAction = /** @class */ (function (_super) {
         _this.bDone = false;
         _this.startTime = 0;
         _this.workDuration = 2; // seconds
-        _this.addPrecondition(ActionDataStatus_1.ActionDataStatus.isTolietOk, false); // we need a tool to do this
         _this.addEffect(ActionDataStatus_1.ActionDataStatus.isTolietOk, true);
         return _this;
     }

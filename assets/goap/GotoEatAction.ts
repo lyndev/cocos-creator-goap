@@ -15,10 +15,7 @@ export class GotoEatAction extends GoapAction {
 	public constructor() {
 		super();
 		this.addPrecondition(ActionDataStatus.isTolietOk, true); // we need a tool to do this
-		this.addPrecondition(ActionDataStatus.isCanOutfire, false); // we need a tool to do this
-
 		this.addEffect(ActionDataStatus.isCanOutfire, true);
-		this.addEffect(ActionDataStatus.isTolietOk, false);
 	}
 
 	public reset(): void {

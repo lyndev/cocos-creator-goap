@@ -31,9 +31,7 @@ var GotoEatAction = /** @class */ (function (_super) {
         _this.workDuration = 2; // seconds
         _this.cost = 1;
         _this.addPrecondition(ActionDataStatus_1.ActionDataStatus.isTolietOk, true); // we need a tool to do this
-        _this.addPrecondition(ActionDataStatus_1.ActionDataStatus.isCanOutfire, false); // we need a tool to do this
         _this.addEffect(ActionDataStatus_1.ActionDataStatus.isCanOutfire, true);
-        _this.addEffect(ActionDataStatus_1.ActionDataStatus.isTolietOk, false);
         return _this;
     }
     GotoEatAction.prototype.reset = function () {

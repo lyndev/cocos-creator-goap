@@ -16,6 +16,12 @@ import { IGoap } from "./IGoap";
  * @Last Modified time: 2018-11-04 17:41:31
  */
 export class GoapAgent extends cc.Component {
+	private availableActions: GoapAction[];
+	private currentActions: GoapAction[];
+	private stateMgr: StateManager;
+	protected goap: IGoap;
+	private planner: GoapPlanner;
+
 	public init(): void {
 		this.initState();
 		this.planner = new GoapPlanner();
@@ -24,8 +30,12 @@ export class GoapAgent extends cc.Component {
 		this.stateMgr.changeState(StateEnum.StateIdle);
 	}
 
-	private stateMgr: StateManager;
-	protected goap: IGoap;
+	private initState() {
+		let stateMgr = this.stateMgr = new StateManager(this);
+		stateMgr.registerState(StateEnum.StateIdle, new StateIdle(this))
+		stateMgr.registerState(StateEnum.StateMove, new StateMove(this))
+		stateMgr.registerState(StateEnum.StatePerformAction, new StatePerformAction(this))
+	}
 
 	public getGoap(): IGoap {
 		return this.goap;
@@ -35,23 +45,22 @@ export class GoapAgent extends cc.Component {
 		this.goap = v
 	}
 
-	private planner: GoapPlanner;
 	public getPlanner(): GoapPlanner {
 		return this.planner;
 	}
 
-	private availableActions: GoapAction[];
 	public getAvaliableActions(): GoapAction[] {
 		return this.availableActions;
 	}
 
-	private currentActions: GoapAction[];
 	public setCurrentActions(currentActions: GoapAction[]) {
 		this.currentActions = currentActions;
 	}
+
 	public peekCurrentActions(): GoapAction {
 		return this.currentActions[0];
 	}
+
 	public dequeueCurrentActions(): GoapAction {
 		return this.currentActions.shift();
 	}
@@ -60,12 +69,6 @@ export class GoapAgent extends cc.Component {
 		return this.currentActions;
 	}
 
-	private initState() {
-		let stateMgr = this.stateMgr = new StateManager(this);
-		stateMgr.registerState(StateEnum.StateIdle, new StateIdle(this))
-		stateMgr.registerState(StateEnum.StateMove, new StateMove(this))
-		stateMgr.registerState(StateEnum.StatePerformAction, new StatePerformAction(this))
-	}
 
 	public changeState(key: string, obj?: any, isForce?: boolean) {
 		this.stateMgr.changeState(key, obj, isForce);
@@ -77,6 +80,7 @@ export class GoapAgent extends cc.Component {
 	public addAction(a: GoapAction) {
 		this.availableActions.push(a);
 	}
+
 	public getAction<T extends GoapAction>(cls: { new(): T }) {
 		for (let action of this.availableActions) {
 			if (action instanceof cls) {
@@ -93,8 +97,17 @@ export class GoapAgent extends cc.Component {
 			}
 		}
 	}
+
 	public hasActionPlan() {
 		return this.currentActions.length > 0;
+	}
+
+	public cleanCurActions() {
+		this.currentActions.length = 0
+	}
+
+	public cleanAvalableActions() {
+		this.availableActions.length = 0
 	}
 
 	private loadActions() {

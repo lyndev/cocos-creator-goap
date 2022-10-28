@@ -6,6 +6,11 @@ cc._RF.push(module, 'e59052yFc1M/Ln98qr2fmVT', 'GoapOutFire2');
 Object.defineProperty(exports, "__esModule", { value: true });
 var ActionDataStatus_1 = require("../ActionDataStatus");
 var DataMemory_1 = require("../DataMemory");
+var GotoEatAction_1 = require("../GotoEatAction");
+var GotoEquipmentAction_1 = require("../GotoEquipmentAction");
+var GotoFireAction_1 = require("../GotoFireAction");
+var GotoToiletAction_1 = require("../GotoToiletAction");
+var GotSleepAction_1 = require("../GotSleepAction");
 var GoapOutFire2 = /** @class */ (function () {
     function GoapOutFire2() {
         this.bMoveEnd = false;
@@ -13,11 +18,24 @@ var GoapOutFire2 = /** @class */ (function () {
         /**拥有的actions */
         this.avaliableActions = [];
         this.memory = new DataMemory_1.default();
+        this.memory.set(ActionDataStatus_1.ActionDataStatus.isTolietOk, false);
+        this.memory.set(ActionDataStatus_1.ActionDataStatus.isCanOutfire, false);
+        this.memory.set(ActionDataStatus_1.ActionDataStatus.isEquipOk, false);
+        this.memory.set(ActionDataStatus_1.ActionDataStatus.isFireOk, false);
+        this.memory.set(ActionDataStatus_1.ActionDataStatus.isSleepOk, false);
     }
-    GoapOutFire2.prototype.initAvaliableActions = function (actionCls) {
+    GoapOutFire2.prototype.initAvaliableActions = function (goapAgent) {
+        var actionCls = [
+            GotoToiletAction_1.GotoToiletAction,
+            GotSleepAction_1.GotSleepAction,
+            GotoEatAction_1.GotoEatAction,
+            GotoEquipmentAction_1.GotoEquipmentAction,
+            GotoFireAction_1.GotoFireAction
+        ];
         var action;
         for (var i = 0, len = actionCls.length; i < len; i++) {
             action = new actionCls[i]();
+            action.goapAgent = goapAgent;
             this.avaliableActions.push(action);
         }
     };
@@ -54,6 +72,7 @@ var GoapOutFire2 = /** @class */ (function () {
     GoapOutFire2.prototype.moveAgent = function (nextAction, delta) {
         var _this = this;
         var target = nextAction.target;
+        var goapAgent = nextAction.goapAgent;
         if (this.bMoveEnd) {
             this.bMoveEnd = false;
             return true;
@@ -67,8 +86,8 @@ var GoapOutFire2 = /** @class */ (function () {
                 _this.bMoving = false;
                 nextAction.setInRange(true);
             }));
-            target.node.stopAllActions();
-            target.node.runAction(cc.sequence(actions));
+            goapAgent.node.stopAllActions();
+            goapAgent.node.runAction(cc.sequence(actions));
         }
         return this.bMoveEnd;
     };

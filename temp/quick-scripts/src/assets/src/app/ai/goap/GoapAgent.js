@@ -43,6 +43,12 @@ var GoapAgent = /** @class */ (function (_super) {
         this.currentActions = [];
         this.stateMgr.changeState(StateEnum_1.StateEnum.StateIdle);
     };
+    GoapAgent.prototype.initState = function () {
+        var stateMgr = this.stateMgr = new StateManager_1.StateManager(this);
+        stateMgr.registerState(StateEnum_1.StateEnum.StateIdle, new StateIdle_1.StateIdle(this));
+        stateMgr.registerState(StateEnum_1.StateEnum.StateMove, new StateMove_1.StateMove(this));
+        stateMgr.registerState(StateEnum_1.StateEnum.StatePerformAction, new StatePerformAction_1.StatePerformAction(this));
+    };
     GoapAgent.prototype.getGoap = function () {
         return this.goap;
     };
@@ -66,12 +72,6 @@ var GoapAgent = /** @class */ (function (_super) {
     };
     GoapAgent.prototype.getCurrentActions = function () {
         return this.currentActions;
-    };
-    GoapAgent.prototype.initState = function () {
-        var stateMgr = this.stateMgr = new StateManager_1.StateManager(this);
-        stateMgr.registerState(StateEnum_1.StateEnum.StateIdle, new StateIdle_1.StateIdle(this));
-        stateMgr.registerState(StateEnum_1.StateEnum.StateMove, new StateMove_1.StateMove(this));
-        stateMgr.registerState(StateEnum_1.StateEnum.StatePerformAction, new StatePerformAction_1.StatePerformAction(this));
     };
     GoapAgent.prototype.changeState = function (key, obj, isForce) {
         this.stateMgr.changeState(key, obj, isForce);
@@ -101,6 +101,12 @@ var GoapAgent = /** @class */ (function (_super) {
     };
     GoapAgent.prototype.hasActionPlan = function () {
         return this.currentActions.length > 0;
+    };
+    GoapAgent.prototype.cleanCurActions = function () {
+        this.currentActions.length = 0;
+    };
+    GoapAgent.prototype.cleanAvalableActions = function () {
+        this.availableActions.length = 0;
     };
     GoapAgent.prototype.loadActions = function () {
         var actions = this.getAvaliableActions();

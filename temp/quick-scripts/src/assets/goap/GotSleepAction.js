@@ -31,7 +31,6 @@ var GotSleepAction = /** @class */ (function (_super) {
         _this.workDuration = 1; // seconds
         _this.cost = 1;
         _this.addPrecondition(ActionDataStatus_1.ActionDataStatus.isTolietOk, true); // we need a tool to do this
-        _this.addPrecondition(ActionDataStatus_1.ActionDataStatus.isCanOutfire, false); // we need a tool to do this
         _this.addEffect(ActionDataStatus_1.ActionDataStatus.isCanOutfire, true);
         return _this;
     }

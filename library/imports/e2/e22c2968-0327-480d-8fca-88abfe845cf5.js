@@ -76,8 +76,7 @@ var GotoFireAction = /** @class */ (function (_super) {
         // this.target = closest;
         // return closest != null;
     };
-    GotoFireAction.prototype.perform = function (iGoap) {
-        var entity = iGoap;
+    GotoFireAction.prototype.perform = function (goapAgent) {
         if (this.startTime == 0)
             this.startTime = TimeUtil_1.default.getTime();
         if (TimeUtil_1.default.getTime() - this.startTime > this.workDuration) {

@@ -1,7 +1,5 @@
 import { GoapAction } from "../src/app/ai/goap/GoapAction";
 import { GoapAgent } from "../src/app/ai/goap/GoapAgent";
-import { IGoap } from "../src/app/ai/goap/IGoap";
-import { VGameObject } from "../src/app/base/VGameObject";
 import { Environment } from "../src/app/gamedata/Environment";
 import TimeUtil from "../src/utils/TimeUtil";
 import { ActionDataStatus } from "./ActionDataStatus";
@@ -12,7 +10,6 @@ export class GotoToiletAction extends GoapAction {
 	private workDuration: number = 2; // seconds
 	public constructor() {
 		super();
-		this.addPrecondition(ActionDataStatus.isTolietOk, false); // we need a tool to do this
 		this.addEffect(ActionDataStatus.isTolietOk, true);
 	}
 
@@ -28,7 +25,7 @@ export class GotoToiletAction extends GoapAction {
 	public requiresInRange() {
 		return true;
 	}
-	public checkProceduralPrecondition(agent: VGameObject): boolean {
+	public checkProceduralPrecondition(agent: GoapAgent): boolean {
 		this.target = Environment.toiletTarget;
 		return this.target != null
 		// // TODO:find the nearest tree that we can chop

@@ -3,13 +3,11 @@ import { GoapAgent } from "../../src/app/ai/goap/GoapAgent";
 import { IGoap } from "../../src/app/ai/goap/IGoap";
 import { ActionDataStatus } from "../ActionDataStatus";
 import DataMemory from "../DataMemory";
-import { GotoEatAction } from "../GotoEatAction";
+import { ExigenceFireAction } from "../ExigenceFireAction";
 import { GotoEquipmentAction } from "../GotoEquipmentAction";
 import { GotoFireAction } from "../GotoFireAction";
-import { GotoToiletAction } from "../GotoToiletAction";
-import { GotSleepAction } from "../GotSleepAction";
 
-export default class GoapOutFire2 implements IGoap {
+export default class GoapOutFireExigence implements IGoap {
     memory: DataMemory
     bMoveEnd: boolean = false
     bMoving: boolean = false
@@ -26,13 +24,7 @@ export default class GoapOutFire2 implements IGoap {
     /**拥有的actions */
     private avaliableActions: GoapAction[] = [];
     public initAvaliableActions(goapAgent: GoapAgent) {
-        let actionCls: any[] = [
-            GotoToiletAction
-            , GotSleepAction
-            , GotoEatAction
-            , GotoEquipmentAction
-            , GotoFireAction
-        ]
+        let actionCls: any[] = [GotoEquipmentAction, GotoFireAction, ExigenceFireAction]
         let action: GoapAction;
         for (let i = 0, len = actionCls.length; i < len; i++) {
             action = new actionCls[i]()

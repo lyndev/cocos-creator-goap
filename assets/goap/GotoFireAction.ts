@@ -1,4 +1,5 @@
 import { GoapAction } from "../src/app/ai/goap/GoapAction";
+import { GoapAgent } from "../src/app/ai/goap/GoapAgent";
 import { IGoap } from "../src/app/ai/goap/IGoap";
 import { VGameObject } from "../src/app/base/VGameObject";
 import { Environment } from "../src/app/gamedata/Environment";
@@ -34,7 +35,7 @@ export class GotoFireAction extends GoapAction {
 	public requiresInRange() {
 		return true;
 	}
-	public checkProceduralPrecondition(agent: VGameObject): boolean {
+	public checkProceduralPrecondition(agent: GoapAgent): boolean {
 		this.target = Environment.fireTarget;
 		return this.target != null
 		// // TODO:find the nearest tree that we can chop
@@ -65,8 +66,7 @@ export class GotoFireAction extends GoapAction {
 		// return closest != null;
 	}
 
-	public perform(iGoap: IGoap): boolean {
-		let entity = iGoap as Entity;
+	public perform(goapAgent: GoapAgent): boolean {
 		if (this.startTime == 0)
 			this.startTime = TimeUtil.getTime();
 

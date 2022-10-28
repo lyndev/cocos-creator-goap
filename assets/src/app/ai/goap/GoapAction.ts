@@ -26,6 +26,10 @@ export abstract class GoapAction {
 	/**
 	* 一个动作通常必须在一个对象上执行。这就是那个对象。可以为空。 */
 	public target: VGameObject;
+	
+
+	// 动作所属
+	public goapAgent:GoapAgent
 
 	public constructor() {
 		this.preconditions = new Map<ActionStatus, Object>();

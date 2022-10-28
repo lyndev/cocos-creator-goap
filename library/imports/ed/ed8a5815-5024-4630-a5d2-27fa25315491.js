@@ -24,34 +24,45 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var ActionDataStatus_1 = require("./ActionDataStatus");
-var GotoToiletAction_1 = require("./GotoToiletAction");
-var GotoEatAction_1 = require("./GotoEatAction");
-var GotoEquipmentAction_1 = require("./GotoEquipmentAction");
-var GotoFireAction_1 = require("./GotoFireAction");
-var GotSleepAction_1 = require("./GotSleepAction");
 var GoapAgent_1 = require("../src/app/ai/goap/GoapAgent");
 var GoapOutFire2_1 = require("./goaps/GoapOutFire2");
+var GoapOutFireExigence_1 = require("./goaps/GoapOutFireExigence");
+var StateEnum_1 = require("../src/app/ai/fsm/state/StateEnum");
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
 var FireNpc = /** @class */ (function (_super) {
     __extends(FireNpc, _super);
     function FireNpc() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.goaps = new Map();
+        return _this;
     }
     FireNpc.prototype.onLoad = function () {
+        var _this = this;
         var goap = new GoapOutFire2_1.default();
-        goap.initAvaliableActions([
-            GotoToiletAction_1.GotoToiletAction,
-            GotSleepAction_1.GotSleepAction,
-            GotoEatAction_1.GotoEatAction,
-            GotoEquipmentAction_1.GotoEquipmentAction,
-            GotoFireAction_1.GotoFireAction
-        ]);
+        goap.initAvaliableActions(this);
+        var goap2 = new GoapOutFireExigence_1.default();
+        goap2.initAvaliableActions(this);
+        this.goaps.set("normal_out_fire", goap);
+        this.goaps.set("normal_out_fire_exigence", goap2);
         this.init();
-        this.setGoap(goap);
-        var actions = goap.getAvaliableActions();
-        for (var index = 0; index < actions.length; index++) {
-            var element = actions[index];
-            this.addAction(element);
+        this.changeGoap("normal_out_fire");
+        cc.tween(this).delay(1).call(function () {
+            _this.changeGoap("normal_out_fire_exigence");
+        }).start();
+    };
+    FireNpc.prototype.changeGoap = function (goapName) {
+        var goap = this.goaps.get(goapName);
+        console.log("切换行动", goapName);
+        if (goap) {
+            this.setGoap(goap);
+            this.cleanAvalableActions();
+            this.cleanCurActions();
+            var actions = goap.getAvaliableActions();
+            for (var index = 0; index < actions.length; index++) {
+                var element = actions[index];
+                this.addAction(element);
+            }
+            this.changeState(StateEnum_1.StateEnum.StateIdle);
         }
     };
     FireNpc.prototype.createGoalState = function () {
