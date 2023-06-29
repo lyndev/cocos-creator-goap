@@ -41,12 +41,12 @@ var ActionBuyShopItem = /** @class */ (function (_super) {
     ActionBuyShopItem.prototype.requiresInRange = function () {
         return true;
     };
-    ActionBuyShopItem.prototype.checkProceduralPrecondition = function (agent) {
+    ActionBuyShopItem.prototype.checkProceduralPrecondition = function (node) {
         if (Environment_1.Environment.storeA.isHaveGoods()) {
             return true;
         }
     };
-    ActionBuyShopItem.prototype.perform = function (agent) {
+    ActionBuyShopItem.prototype.perform = function (node) {
         if (this.startTime == 0)
             this.startTime = TimeUtil_1.default.getTime();
         if (TimeUtil_1.default.getTime() - this.startTime > this.workDuration) {

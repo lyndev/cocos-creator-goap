@@ -18,6 +18,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.StateIdle = void 0;
+var GoapAgent_1 = require("../../goap/GoapAgent");
 var StateBase_1 = require("./StateBase");
 var StateEnum_1 = require("./StateEnum");
 var StateIdle = /** @class */ (function (_super) {
@@ -25,14 +26,13 @@ var StateIdle = /** @class */ (function (_super) {
     function StateIdle() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    StateIdle.prototype.onEnter = function () {
-    };
+    StateIdle.prototype.onEnter = function () { };
     /**
      * 状态更新
      * @return
      */
     StateIdle.prototype.onUpdate = function (timeStamp) {
-        var owner = this.owner;
+        var owner = this.owner.getComponent(GoapAgent_1.GoapAgent);
         var goap = owner.getGoap();
         var planner = owner.getPlanner();
         var avaliableActions = owner.getAvaliableActions();
@@ -41,7 +41,7 @@ var StateIdle = /** @class */ (function (_super) {
         var worldState = goap.getWorldState();
         var goal = goap.createGoalState();
         // plan
-        var plan = planner.plan(owner, avaliableActions, worldState, goal);
+        var plan = planner.plan(owner.node, avaliableActions, worldState, goal);
         if (plan != null) {
             // we have a plan, hooray!
             owner.setCurrentActions(plan);

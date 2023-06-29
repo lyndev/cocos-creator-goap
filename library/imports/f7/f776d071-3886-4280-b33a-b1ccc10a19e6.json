@@ -1,0 +1,7 @@
+{
+  "__type__": "cc.TextAsset",
+  "_name": "测试3",
+  "_objFlags": 0,
+  "_native": "",
+  "text": "随机生成购物需求\n2 购买番茄（n个）\n3 购买鸡蛋（n个）\n4 结算\n5 离开超市"
+}

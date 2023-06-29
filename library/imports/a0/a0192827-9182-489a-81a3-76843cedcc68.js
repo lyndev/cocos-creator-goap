@@ -25,18 +25,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Blacksmith = void 0;
 var ActionStatus_1 = require("../../ai/goap/ActionStatus");
+var VGameObject_1 = require("../../base/VGameObject");
 var DropOffToolsAction_1 = require("../actions/DropOffToolsAction");
 var ForgeToolAction_1 = require("../actions/ForgeToolAction");
 var PickUpOreAction_1 = require("../actions/PickUpOreAction");
 var Labourer_1 = require("./Labourer");
-var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
+var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property, requireComponent = _a.requireComponent;
 var Blacksmith = /** @class */ (function (_super) {
     __extends(Blacksmith, _super);
     function Blacksmith() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    Blacksmith.prototype.initAvaliableActions = function () {
-        this.toInitAvaliableActions([ForgeToolAction_1.ForgeToolAction, DropOffToolsAction_1.DropOffToolsAction, PickUpOreAction_1.PickUpOreAction]);
+    Blacksmith.prototype.onLoad = function () {
+        _super.prototype.onLoad.call(this);
+        this.initAvaliableActions([ForgeToolAction_1.ForgeToolAction, DropOffToolsAction_1.DropOffToolsAction, PickUpOreAction_1.PickUpOreAction]);
     };
     /**
      * Our only goal will ever be to make tools.
@@ -51,7 +53,8 @@ var Blacksmith = /** @class */ (function (_super) {
         console.log("矿石：" + this.backpack.numOre);
     };
     Blacksmith = __decorate([
-        ccclass
+        ccclass,
+        requireComponent(VGameObject_1.VGameObject)
     ], Blacksmith);
     return Blacksmith;
 }(Labourer_1.Labourer));

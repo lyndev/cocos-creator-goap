@@ -30,12 +30,8 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.VMiner = void 0;
 var VLabourer_1 = require("./VLabourer");
-/*
- * @Description: 矿工
- * @Author: RannarYang
- * @Date: 2018-11-03 12:14:32
- * @Last Modified by: RannarYang
- * @Last Modified time: 2018-11-03 12:17:13
+/**
+ * 矿工
  */
 var VMiner = /** @class */ (function (_super) {
     __extends(VMiner, _super);
@@ -57,4 +53,4 @@ cc._RF.pop();
                         });
                     }
                 })();
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFzc2V0c1xcc3JjXFxhcHBcXGdhbWVkYXRhXFxsYWJvdXJlcnNcXHZsYWJvdXJlcnNcXFZNaW5lci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQ0EseUNBQXdDO0FBRXhDOzs7Ozs7R0FNRztBQUNIO0lBQTRCLDBCQUFTO0lBRXBDO2VBQ0MsaUJBQU87SUFDUixDQUFDO0lBQ0YsYUFBQztBQUFELENBTEEsQUFLQyxDQUwyQixxQkFBUyxHQUtwQztBQUxZLHdCQUFNIiwiZmlsZSI6IiIsInNvdXJjZVJvb3QiOiIvIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgTWluZXIgfSBmcm9tIFwiLi4vTWluZXJcIjtcclxuaW1wb3J0IHsgVkxhYm91cmVyIH0gZnJvbSBcIi4vVkxhYm91cmVyXCI7XHJcblxyXG4vKlxyXG4gKiBARGVzY3JpcHRpb246IOefv+W3pVxyXG4gKiBAQXV0aG9yOiBSYW5uYXJZYW5nIFxyXG4gKiBARGF0ZTogMjAxOC0xMS0wMyAxMjoxNDozMiBcclxuICogQExhc3QgTW9kaWZpZWQgYnk6IFJhbm5hcllhbmdcclxuICogQExhc3QgTW9kaWZpZWQgdGltZTogMjAxOC0xMS0wMyAxMjoxNzoxM1xyXG4gKi9cclxuZXhwb3J0IGNsYXNzIFZNaW5lciBleHRlbmRzIFZMYWJvdXJlciB7XHJcblx0cHJvdGVjdGVkIGxhYm91cmVyOiBNaW5lcjtcclxuXHRwdWJsaWMgY29uc3RydWN0b3IoKSB7XHJcblx0XHRzdXBlcigpO1xyXG5cdH1cclxufSJdfQ==
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFzc2V0cy9zcmMvYXBwL2dhbWVkYXRhL2xhYm91cmVycy92bGFib3VyZXJzL1ZNaW5lci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQ0EseUNBQXdDO0FBQ3hDOztHQUVHO0FBQ0g7SUFBNEIsMEJBQVM7SUFFcEM7ZUFDQyxpQkFBTztJQUNSLENBQUM7SUFDRixhQUFDO0FBQUQsQ0FMQSxBQUtDLENBTDJCLHFCQUFTLEdBS3BDO0FBTFksd0JBQU0iLCJmaWxlIjoiIiwic291cmNlUm9vdCI6Ii8iLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBNaW5lciB9IGZyb20gXCIuLi9NaW5lclwiO1xuaW1wb3J0IHsgVkxhYm91cmVyIH0gZnJvbSBcIi4vVkxhYm91cmVyXCI7XG4vKipcbiAqIOefv+W3pVxuICovXG5leHBvcnQgY2xhc3MgVk1pbmVyIGV4dGVuZHMgVkxhYm91cmVyIHtcblx0cHJvdGVjdGVkIGxhYm91cmVyOiBNaW5lcjtcblx0cHVibGljIGNvbnN0cnVjdG9yKCkge1xuXHRcdHN1cGVyKCk7XG5cdH1cbn0iXX0=

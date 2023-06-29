@@ -20,13 +20,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.PickUpLogsAction = void 0;
 var ActionStatus_1 = require("../../ai/goap/ActionStatus");
 var GoapAction_1 = require("../../ai/goap/GoapAction");
-/*
- * @Description:
- * @Author: RannarYang
- * @Date: 2018-09-06 00:14:10
- * @Last Modified by: RannarYang
- * @Last Modified time: 2018-10-28 11:36:49
- */
+var VGameObject_1 = require("../../base/VGameObject");
+var Labourer_1 = require("../labourers/Labourer");
 var PickUpLogsAction = /** @class */ (function (_super) {
     __extends(PickUpLogsAction, _super);
     function PickUpLogsAction() {
@@ -50,17 +45,18 @@ var PickUpLogsAction = /** @class */ (function (_super) {
         var supplyPiles = [];
         var closest = null;
         var closestDist = 0;
+        var vg = agent.getComponent(VGameObject_1.VGameObject);
         for (var _i = 0, supplyPiles_1 = supplyPiles; _i < supplyPiles_1.length; _i++) {
             var supply = supplyPiles_1[_i];
             if (supply.numLogs > 0) {
                 if (closest == null) {
                     // first one, so choose it for now
                     closest = supply;
-                    closestDist = supply.distanceSquare(agent);
+                    closestDist = supply.distanceSquare(vg);
                 }
                 else {
                     // is this one closer than the last?
-                    var dist = supply.distanceSquare(agent);
+                    var dist = supply.distanceSquare(vg);
                     if (dist < closestDist) {
                         // we found a closer one, use it
                         closest = supply;
@@ -74,11 +70,11 @@ var PickUpLogsAction = /** @class */ (function (_super) {
         this.target = closest;
         return closest != null;
     };
-    PickUpLogsAction.prototype.perform = function (labourer) {
+    PickUpLogsAction.prototype.perform = function (node) {
         if (this.target.numLogs > 0) {
             this.target.numLogs -= 1;
             this.hasLogs = true;
-            //TODO play effect, change actor icon
+            var labourer = node.getComponent(Labourer_1.Labourer);
             var backpack = labourer.backpack;
             backpack.numLogs = 1;
             return true;

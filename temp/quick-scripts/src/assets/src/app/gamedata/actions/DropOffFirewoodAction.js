@@ -20,14 +20,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.DropOffFirewoodAction = void 0;
 var ActionStatus_1 = require("../../ai/goap/ActionStatus");
 var GoapAction_1 = require("../../ai/goap/GoapAction");
+var VGameObject_1 = require("../../base/VGameObject");
 var Environment_1 = require("../Environment");
-/*
- * @Description:
- * @Author: RannarYang
- * @Date: 2018-09-06 00:09:17
- * @Last Modified by: RannarYang
- * @Last Modified time: 2018-10-28 11:32:49
- */
+var Labourer_1 = require("../labourers/Labourer");
 var DropOffFirewoodAction = /** @class */ (function (_super) {
     __extends(DropOffFirewoodAction, _super);
     function DropOffFirewoodAction() {
@@ -47,21 +42,22 @@ var DropOffFirewoodAction = /** @class */ (function (_super) {
     DropOffFirewoodAction.prototype.requiresInRange = function () {
         return true; // yes we need to be near a supply pile so we can drop off the firewood
     };
-    DropOffFirewoodAction.prototype.checkProceduralPrecondition = function (agent) {
+    DropOffFirewoodAction.prototype.checkProceduralPrecondition = function (go) {
         // TODO:find the nearest supply pile that has spare firewood
         var supplyPiles = Environment_1.Environment.supplyPileComps;
         var closest = null;
         var closestDist = 0;
+        var vGameObject = go.getComponent(VGameObject_1.VGameObject);
         for (var _i = 0, supplyPiles_1 = supplyPiles; _i < supplyPiles_1.length; _i++) {
             var supply = supplyPiles_1[_i];
             if (closest == null) {
                 // first one, so choose it for now
                 closest = supply;
-                closestDist = supply.distanceSquare(agent);
+                closestDist = supply.distanceSquare(vGameObject);
             }
             else {
                 // is this one closer than the last?
-                var dist = supply.distanceSquare(agent);
+                var dist = supply.distanceSquare(vGameObject);
                 if (dist < closestDist) {
                     // we found a closer one, use it
                     closest = supply;
@@ -74,12 +70,12 @@ var DropOffFirewoodAction = /** @class */ (function (_super) {
         this.target = closest;
         return closest != null;
     };
-    DropOffFirewoodAction.prototype.perform = function (iGoap) {
-        var labourer = iGoap;
+    DropOffFirewoodAction.prototype.perform = function (node) {
+        var labourer = node.getComponent(Labourer_1.Labourer);
         var backpack = labourer.backpack;
-        backpack.numFirewood += backpack.numFirewood;
-        this.droppedOffFirewood = true;
+        this.target.numFirewood += backpack.numFirewood;
         backpack.numFirewood = 0;
+        this.droppedOffFirewood = true;
         return true;
     };
     return DropOffFirewoodAction;

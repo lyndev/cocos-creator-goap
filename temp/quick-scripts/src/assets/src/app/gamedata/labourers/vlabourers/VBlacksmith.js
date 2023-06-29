@@ -19,12 +19,8 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.VBlacksmith = void 0;
 var VLabourer_1 = require("./VLabourer");
-/*
- * @Description: 铁匠
- * @Author: RannarYang
- * @Date: 2018-11-03 12:13:59
- * @Last Modified by: RannarYang
- * @Last Modified time: 2018-11-03 12:16:30
+/**
+ * 铁匠
  */
 var VBlacksmith = /** @class */ (function (_super) {
     __extends(VBlacksmith, _super);

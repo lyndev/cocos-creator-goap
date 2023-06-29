@@ -18,6 +18,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.StateMove = void 0;
+var GoapAgent_1 = require("../../goap/GoapAgent");
 var StateBase_1 = require("./StateBase");
 var StateEnum_1 = require("./StateEnum");
 var StateMove = /** @class */ (function (_super) {
@@ -25,24 +26,23 @@ var StateMove = /** @class */ (function (_super) {
     function StateMove() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    StateMove.prototype.onEnter = function () {
-    };
+    StateMove.prototype.onEnter = function () { };
     /**
      * 状态更新
      * @return
      */
     StateMove.prototype.onUpdate = function (delta) {
-        var owner = this.owner;
-        var goap = owner.getGoap();
-        var action = this.owner.peekCurrentActions();
+        var goapAgent = this.owner.getComponent(GoapAgent_1.GoapAgent);
+        var goap = goapAgent.getGoap();
+        var action = goapAgent.peekCurrentActions();
         if (action.requiresInRange() && action.target == null) {
             console.log("Fatal error: Action requires a target but has none. Planning failed. You did not assign the target in your Action.checkProceduralPrecondition()");
-            this.owner.changeState(StateEnum_1.StateEnum.StateIdle);
+            goapAgent.changeState(StateEnum_1.StateEnum.StateIdle);
             return;
         }
         // get the agent to move itself
         if (goap.moveAgent(action, delta)) {
-            this.owner.changeState(StateEnum_1.StateEnum.StatePerformAction);
+            goapAgent.changeState(StateEnum_1.StateEnum.StatePerformAction);
         }
     };
     return StateMove;

@@ -19,12 +19,8 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.VWoodCutter = void 0;
 var VLabourer_1 = require("./VLabourer");
-/*
- * @Description: 伐木工
- * @Author: RannarYang
- * @Date: 2018-11-03 12:13:51
- * @Last Modified by: RannarYang
- * @Last Modified time: 2018-11-03 12:17:39
+/**
+ * 伐木工
  */
 var VWoodCutter = /** @class */ (function (_super) {
     __extends(VWoodCutter, _super);

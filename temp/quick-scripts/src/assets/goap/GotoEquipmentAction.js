@@ -43,7 +43,7 @@ var GotoEquipmentAction = /** @class */ (function (_super) {
     GotoEquipmentAction.prototype.requiresInRange = function () {
         return true;
     };
-    GotoEquipmentAction.prototype.checkProceduralPrecondition = function (agent) {
+    GotoEquipmentAction.prototype.checkProceduralPrecondition = function (go) {
         this.target = Environment_1.Environment.equipTarget;
         return this.target != null;
         // // TODO:find the nearest tree that we can chop
@@ -70,7 +70,7 @@ var GotoEquipmentAction = /** @class */ (function (_super) {
         // this.target = closest;
         // return closest != null;
     };
-    GotoEquipmentAction.prototype.perform = function (agent) {
+    GotoEquipmentAction.prototype.perform = function (node) {
         if (this.startTime == 0)
             this.startTime = TimeUtil_1.default.getTime();
         if (TimeUtil_1.default.getTime() - this.startTime > this.workDuration) {

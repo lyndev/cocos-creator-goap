@@ -44,7 +44,7 @@ var GotSleepAction = /** @class */ (function (_super) {
     GotSleepAction.prototype.requiresInRange = function () {
         return true;
     };
-    GotSleepAction.prototype.checkProceduralPrecondition = function (agent) {
+    GotSleepAction.prototype.checkProceduralPrecondition = function (go) {
         this.target = Environment_1.Environment.sleepTarget;
         return this.target != null;
         // // TODO:find the nearest tree that we can chop
@@ -71,7 +71,7 @@ var GotSleepAction = /** @class */ (function (_super) {
         // this.target = closest;
         // return closest != null;
     };
-    GotSleepAction.prototype.perform = function (agent) {
+    GotSleepAction.prototype.perform = function (node) {
         if (this.startTime == 0)
             this.startTime = TimeUtil_1.default.getTime();
         if (TimeUtil_1.default.getTime() - this.startTime > this.workDuration) {

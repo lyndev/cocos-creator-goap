@@ -36,9 +36,7 @@ export class SupplyPileComponent extends VGameObject {
 		val = Number(val);
 		this._numLogs = val;
 		this.txtLogNum && (this.txtLogNum.string = "原木：" + val);
-
 	}
-
 
 	private _numFirewood: number = 0; // what we want to make
 	public get numFirewood(): number {

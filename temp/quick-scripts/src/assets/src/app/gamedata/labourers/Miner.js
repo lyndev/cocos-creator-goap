@@ -25,26 +25,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Miner = void 0;
 var ActionStatus_1 = require("../../ai/goap/ActionStatus");
+var VGameObject_1 = require("../../base/VGameObject");
 var DropOffOreAction_1 = require("../actions/DropOffOreAction");
 var MineOreAction_1 = require("../actions/MineOreAction");
 var PickUpToolAction_1 = require("../actions/PickUpToolAction");
 var Labourer_1 = require("./Labourer");
-/*
- * @Description: 矿工
- * @Author: Rannar.Yang
- * @Date: 2018-09-05 20:40:44
- * @Last Modified by: RannarYang
- * @Last Modified time: 2018-11-04 18:41:37
+/**
+ *  矿工
  */
-var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
+var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property, requireComponent = _a.requireComponent;
 var Miner = /** @class */ (function (_super) {
     __extends(Miner, _super);
     function Miner() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    //public labourerType = LabourerType.Miner;
-    Miner.prototype.initAvaliableActions = function () {
-        this.toInitAvaliableActions([MineOreAction_1.MineOreAction, PickUpToolAction_1.PickUpToolAction, DropOffOreAction_1.DropOffOreAction]);
+    Miner.prototype.onLoad = function () {
+        _super.prototype.onLoad.call(this);
+        this.initAvaliableActions([MineOreAction_1.MineOreAction, PickUpToolAction_1.PickUpToolAction, DropOffOreAction_1.DropOffOreAction]);
     };
     /**
      * Our only goal will ever be to mine ore.
@@ -59,7 +56,8 @@ var Miner = /** @class */ (function (_super) {
         console.log("矿石：" + this.backpack.numOre);
     };
     Miner = __decorate([
-        ccclass
+        ccclass,
+        requireComponent(VGameObject_1.VGameObject)
     ], Miner);
     return Miner;
 }(Labourer_1.Labourer));

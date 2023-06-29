@@ -16,6 +16,12 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GoapAgent = void 0;
 var StateEnum_1 = require("../fsm/state/StateEnum");
@@ -24,30 +30,24 @@ var StateMove_1 = require("../fsm/state/StateMove");
 var StatePerformAction_1 = require("../fsm/state/StatePerformAction");
 var StateManager_1 = require("../fsm/StateManager");
 var GoapPlanner_1 = require("./GoapPlanner");
-/*
- * @Description:
- * @Author: RannarYang
- * @Date: 2018-09-06 00:09:30
- * @Last Modified by: RannarYang
- * @Last Modified time: 2018-11-04 17:41:31
- */
+var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
 var GoapAgent = /** @class */ (function (_super) {
     __extends(GoapAgent, _super);
     function GoapAgent() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    GoapAgent.prototype.init = function () {
+    GoapAgent_1 = GoapAgent;
+    GoapAgent.prototype.onLoad = function () {
         this.initState();
         this.planner = new GoapPlanner_1.GoapPlanner();
-        this.availableActions = [];
         this.currentActions = [];
         this.stateMgr.changeState(StateEnum_1.StateEnum.StateIdle);
     };
     GoapAgent.prototype.initState = function () {
-        var stateMgr = this.stateMgr = new StateManager_1.StateManager(this);
-        stateMgr.registerState(StateEnum_1.StateEnum.StateIdle, new StateIdle_1.StateIdle(this));
-        stateMgr.registerState(StateEnum_1.StateEnum.StateMove, new StateMove_1.StateMove(this));
-        stateMgr.registerState(StateEnum_1.StateEnum.StatePerformAction, new StatePerformAction_1.StatePerformAction(this));
+        var stateMgr = (this.stateMgr = new StateManager_1.StateManager(this.node));
+        stateMgr.registerState(StateEnum_1.StateEnum.StateIdle, new StateIdle_1.StateIdle(this.node));
+        stateMgr.registerState(StateEnum_1.StateEnum.StateMove, new StateMove_1.StateMove(this.node));
+        stateMgr.registerState(StateEnum_1.StateEnum.StatePerformAction, new StatePerformAction_1.StatePerformAction(this.node));
     };
     GoapAgent.prototype.getGoap = function () {
         return this.goap;
@@ -114,7 +114,7 @@ var GoapAgent = /** @class */ (function (_super) {
             var action = actions_1[_i];
             this.availableActions.push(action);
         }
-        console.log("Found actions: " + GoapAgent.prettyPrintActions(actions));
+        console.log("Found actions: " + GoapAgent_1.prettyPrintActions(actions));
     };
     // 输出 ==================================================
     GoapAgent.prettyPrintState = function (state) {
@@ -146,6 +146,10 @@ var GoapAgent = /** @class */ (function (_super) {
     GoapAgent.prettyPrintAction = function (action) {
         return "" + action.constructor.name;
     };
+    var GoapAgent_1;
+    GoapAgent = GoapAgent_1 = __decorate([
+        ccclass
+    ], GoapAgent);
     return GoapAgent;
 }(cc.Component));
 exports.GoapAgent = GoapAgent;

@@ -21,14 +21,9 @@ exports.ChopFirewoodAction = void 0;
 var TimeUtil_1 = require("../../../utils/TimeUtil");
 var ActionStatus_1 = require("../../ai/goap/ActionStatus");
 var GoapAction_1 = require("../../ai/goap/GoapAction");
+var VGameObject_1 = require("../../base/VGameObject");
 var Environment_1 = require("../Environment");
-/*
- * @Description:
- * @Author: RannarYang
- * @Date: 2018-09-06 00:09:09
- * @Last Modified by: RannarYang
- * @Last Modified time: 2018-11-04 17:35:57
- */
+var Labourer_1 = require("../labourers/Labourer");
 var ChopFirewoodAction = /** @class */ (function (_super) {
     __extends(ChopFirewoodAction, _super);
     function ChopFirewoodAction() {
@@ -51,21 +46,21 @@ var ChopFirewoodAction = /** @class */ (function (_super) {
     ChopFirewoodAction.prototype.requiresInRange = function () {
         return true;
     };
-    ChopFirewoodAction.prototype.checkProceduralPrecondition = function (agent) {
-        var labourer = agent;
+    ChopFirewoodAction.prototype.checkProceduralPrecondition = function (go) {
         // find the nearest chopping block that we can chop our wood at
         var blocks = Environment_1.Environment.choppingBlockComps;
         var closest = null;
         var closestDist = 0;
+        var vg = go.getComponent(VGameObject_1.VGameObject);
         for (var _i = 0, blocks_1 = blocks; _i < blocks_1.length; _i++) {
             var block = blocks_1[_i];
             if (closest == null) {
                 closest = block;
-                closestDist = block.distanceSquare(agent);
+                closestDist = block.distanceSquare(vg);
             }
             else {
                 // is this one closer than the last?
-                var dist = block.distanceSquare(agent);
+                var dist = block.distanceSquare(vg);
                 if (dist < closestDist) {
                     // we found a closer one, use it
                     closest = block;
@@ -78,8 +73,8 @@ var ChopFirewoodAction = /** @class */ (function (_super) {
         this.target = closest;
         return closest != null;
     };
-    ChopFirewoodAction.prototype.perform = function (iGoap) {
-        var labourer = iGoap;
+    ChopFirewoodAction.prototype.perform = function (node) {
+        var labourer = node.getComponent(Labourer_1.Labourer);
         if (this.startTime == 0)
             this.startTime = TimeUtil_1.default.getTime();
         if (TimeUtil_1.default.getTime() - this.startTime > this.workDuration) {

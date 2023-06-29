@@ -16,11 +16,11 @@ var GoapAction = /** @class */ (function () {
     function GoapAction() {
         this.inRange = false;
         /* 执行动作的成本。
-        * 找出适合动作的重量。
-        * 更改它将影响在计划期间选择的操作。*/
+         * 找出适合动作的重量。
+         * 更改它将影响在计划期间选择的操作。*/
         this.cost = 1;
-        this.preconditions = new Map();
-        this.effects = new Map();
+        this._preconditions = new Map();
+        this._effects = new Map();
     }
     GoapAction.prototype.doReset = function () {
         this.inRange = false;
@@ -38,27 +38,27 @@ var GoapAction = /** @class */ (function () {
         this.inRange = inRange;
     };
     GoapAction.prototype.addPrecondition = function (key, value) {
-        this.preconditions.set(key, value);
+        this._preconditions.set(key, value);
     };
     GoapAction.prototype.removePrecondition = function (key) {
-        this.preconditions.delete(key);
+        this._preconditions.delete(key);
     };
     GoapAction.prototype.addEffect = function (key, value) {
-        this.effects.set(key, value);
+        this._effects.set(key, value);
     };
     GoapAction.prototype.removeEffect = function (key) {
-        this.effects.delete(key);
+        this._effects.delete(key);
     };
-    Object.defineProperty(GoapAction.prototype, "Preconditions", {
+    Object.defineProperty(GoapAction.prototype, "preconditions", {
         get: function () {
-            return this.preconditions;
+            return this._preconditions;
         },
         enumerable: false,
         configurable: true
     });
-    Object.defineProperty(GoapAction.prototype, "Effects", {
+    Object.defineProperty(GoapAction.prototype, "effects", {
         get: function () {
-            return this.effects;
+            return this._effects;
         },
         enumerable: false,
         configurable: true

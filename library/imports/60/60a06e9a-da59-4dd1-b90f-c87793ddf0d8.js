@@ -3,12 +3,8 @@ cc._RF.push(module, '60a066a2llN0bkPyHeT3fDY', 'StateManager');
 // src/app/ai/fsm/StateManager.ts
 
 "use strict";
-/*
- * @Description: 状态管理类
- * @Author: Rannar.Yang
- * @Date: 2018-06-29 10:16:55
- * @Last Modified by: Rannar.Yang
- * @Last Modified time: 2018-07-05 17:35:31
+/**
+ * 状态管理类
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.StateManager = void 0;

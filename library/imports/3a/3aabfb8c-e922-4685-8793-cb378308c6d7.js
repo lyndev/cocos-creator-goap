@@ -3,13 +3,6 @@ cc._RF.push(module, '3aabfuM6SJGhYeTyzeDCMbX', 'Labourer');
 // src/app/gamedata/labourers/Labourer.ts
 
 "use strict";
-/*
- * @Description: {}
- * @Author: Rannar.Yang
- * @Date: 2018-09-05 20:52:30
- * @Last Modified by: RannarYang
- * @Last Modified time: 2018-11-04 18:31:49
- */
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -36,46 +29,35 @@ var GoapAgent_1 = require("../../ai/goap/GoapAgent");
 var GameDataManager_1 = require("../../data/GameDataManager");
 var LabourerType_1 = require("../../data/LabourerType");
 var ToolComponent_1 = require("../ToolComponent");
-/**
- * A general labourer export class.
- * You should subexport class this for specific Labourer export classes and implement
- * the createGoalState() method that will populate the goal for the GOAP
- * planner.
- */
-var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
+var _a = cc._decorator, requireComponent = _a.requireComponent, ccclass = _a.ccclass, property = _a.property;
 var Labourer = /** @class */ (function (_super) {
     __extends(Labourer, _super);
     function Labourer() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.labourerType = LabourerType_1.LabourerType.None;
-        /**拥有的actions */
-        _this.avaliableActions = [];
         _this.bMoving = false;
         _this.bMoveEnd = false;
         return _this;
     }
-    Labourer.prototype.getAvaliableActions = function () {
-        return this.avaliableActions;
-    };
-    Labourer.prototype.toInitAvaliableActions = function (actionCls) {
-        var action;
-        for (var i = 0, len = actionCls.length; i < len; i++) {
-            action = new actionCls[i]();
-            this.avaliableActions.push(action);
-        }
-    };
     Labourer.prototype.onLoad = function () {
-        //super.childrenCreated();
+        _super.prototype.onLoad.call(this);
+        var goapAgent = this.getComponent(GoapAgent_1.GoapAgent);
+        goapAgent.setGoap(this);
         this.bean = GameDataManager_1.GameDataManager.I.t_labourderContainer.getLabourerByType(this.labourerType);
         if (!this.tool) {
             this.pickUpTool();
         }
-        this.initAvaliableActions();
-        //this.goapAgent = new GoapAgent(this);
     };
-    Labourer.prototype.initAvaliableActions = function () { };
-    Labourer.prototype.update = function (delta) {
-        this.update(delta);
+    Labourer.prototype.initAvaliableActions = function (actionCls) {
+        var action;
+        this.availableActions = [];
+        for (var i = 0, len = actionCls.length; i < len; i++) {
+            action = new actionCls[i]();
+            this.availableActions.push(action);
+        }
+    };
+    Labourer.prototype.update = function (dt) {
+        _super.prototype.update.call(this, dt);
     };
     Labourer.prototype.getWorldState = function () {
         var worldData = new Map();
@@ -88,13 +70,9 @@ var Labourer = /** @class */ (function (_super) {
     Labourer.prototype.hasTool = function () {
         return this.tool != null;
     };
-    /**
-     * Implement in subexport classes
-     */
     Labourer.prototype.createGoalState = function () {
-        return new Map();
+        throw new Error("Method not implemented.");
     };
-    ;
     Labourer.prototype.planFailed = function (failedGoad) {
         // Not handling this here since we are making sure our goals will always succeed.
         // But normally you want to make sure the world state has changed before running
@@ -134,16 +112,6 @@ var Labourer = /** @class */ (function (_super) {
             this.node.runAction(cc.sequence(actions));
         }
         return this.bMoveEnd;
-        // let step = this.bean.speed * delta;
-        // let target = nextAction.target;
-        // // 设置新的position
-        // this.moveTo(target, step);
-        // if (this.posEquip(target)) {
-        // 	nextAction.setInRange(true);
-        // 	return true;
-        // } else {
-        // 	return false;
-        // }
     };
     /**设置背包里的物品 */
     Labourer.prototype.setBackPack = function (backpack) {
@@ -153,20 +121,13 @@ var Labourer = /** @class */ (function (_super) {
     /**拾取工具 */
     Labourer.prototype.pickUpTool = function () {
         this.tool = new ToolComponent_1.ToolComponent();
-        console.log('拾取工具', this.constructor.name);
-        //let tool = 
-        // tool.node.x = 18;
-        // tool.node.y = 35;
-        //	tool.node.getComponent(cc.Sprite).spriteFrame = ToolType.getSource(this.bean.toolType);
-        // this.addChild(tool);
+        console.log("拾取工具", this.constructor.name);
     };
     /**销毁工具 */
     Labourer.prototype.destroyTool = function () {
-        //this.removeChild(this.tool);
         this.tool = undefined;
     };
-    Labourer.prototype.updateBackPack = function () {
-    };
+    Labourer.prototype.updateBackPack = function () { };
     __decorate([
         property({ type: cc.Enum(LabourerType_1.LabourerType), displayName: "type" })
     ], Labourer.prototype, "labourerType", void 0);

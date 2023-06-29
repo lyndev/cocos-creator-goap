@@ -6,13 +6,6 @@ cc._RF.push(module, '7a7215gBjVCG7JMSK5HcnBT', 'StateBase');
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.StateBase = void 0;
 var StateManager_1 = require("../StateManager");
-/*
- * @Description: 状态基类
- * @Author: Rannar.Yang
- * @Date: 2018-06-29 10:17:10
- * @Last Modified by: Rannar.Yang
- * @Last Modified time: 2018-06-29 10:17:32
- */
 var StateBase = /** @class */ (function () {
     function StateBase(owner) {
         this._owner = owner;

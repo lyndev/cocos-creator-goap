@@ -25,25 +25,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.WoodCutter = void 0;
 var ActionStatus_1 = require("../../ai/goap/ActionStatus");
+var VGameObject_1 = require("../../base/VGameObject");
 var ChopFirewoodAction_1 = require("../actions/ChopFirewoodAction");
 var DropOffFirewoodAction_1 = require("../actions/DropOffFirewoodAction");
 var PickUpToolAction_1 = require("../actions/PickUpToolAction");
 var Labourer_1 = require("./Labourer");
-/*
- * @Description: 伐木工
- * @Author: Rannar.Yang
- * @Date: 2018-09-05 20:40:44
- * @Last Modified by: RannarYang
- * @Last Modified time: 2018-11-04 18:28:30
+/**
+ * 砍柴工
  */
-var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
+var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property, requireComponent = _a.requireComponent;
 var WoodCutter = /** @class */ (function (_super) {
     __extends(WoodCutter, _super);
     function WoodCutter() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    WoodCutter.prototype.initAvaliableActions = function () {
-        this.toInitAvaliableActions([ChopFirewoodAction_1.ChopFirewoodAction, DropOffFirewoodAction_1.DropOffFirewoodAction, PickUpToolAction_1.PickUpToolAction]);
+    WoodCutter.prototype.onLoad = function () {
+        _super.prototype.onLoad.call(this);
+        this.initAvaliableActions([ChopFirewoodAction_1.ChopFirewoodAction, DropOffFirewoodAction_1.DropOffFirewoodAction, PickUpToolAction_1.PickUpToolAction]);
     };
     /**
      * Our only goal will ever be to chop logs.
@@ -58,7 +56,8 @@ var WoodCutter = /** @class */ (function (_super) {
         console.log("木柴：" + this.backpack.numFirewood);
     };
     WoodCutter = __decorate([
-        ccclass
+        ccclass,
+        requireComponent(VGameObject_1.VGameObject)
     ], WoodCutter);
     return WoodCutter;
 }(Labourer_1.Labourer));

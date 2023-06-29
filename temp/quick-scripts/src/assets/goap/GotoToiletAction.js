@@ -42,7 +42,7 @@ var GotoToiletAction = /** @class */ (function (_super) {
     GotoToiletAction.prototype.requiresInRange = function () {
         return true;
     };
-    GotoToiletAction.prototype.checkProceduralPrecondition = function (agent) {
+    GotoToiletAction.prototype.checkProceduralPrecondition = function (go) {
         this.target = Environment_1.Environment.toiletTarget;
         return this.target != null;
         // // TODO:find the nearest tree that we can chop
@@ -69,7 +69,7 @@ var GotoToiletAction = /** @class */ (function (_super) {
         // this.target = closest;
         // return closest != null;
     };
-    GotoToiletAction.prototype.perform = function (agent) {
+    GotoToiletAction.prototype.perform = function (node) {
         if (this.startTime == 0)
             this.startTime = TimeUtil_1.default.getTime();
         if (TimeUtil_1.default.getTime() - this.startTime > this.workDuration) {

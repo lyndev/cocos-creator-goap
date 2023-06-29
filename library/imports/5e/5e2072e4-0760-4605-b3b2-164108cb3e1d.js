@@ -3,13 +3,6 @@ cc._RF.push(module, '5e207LkB2BGBbOyFkEIyz4d', 'GoapPlanner');
 // src/app/ai/goap/GoapPlanner.ts
 
 "use strict";
-/*
- * @Description:
- * @Author: RannarYang
- * @Date: 2018-09-06 00:09:35
- * @Last Modified by: RannarYang
- * @Last Modified time: 2018-11-04 18:04:36
- */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PlanNode = exports.GoapPlanner = void 0;
 /**
@@ -23,7 +16,7 @@ var GoapPlanner = /** @class */ (function () {
      * Returns null if a plan could not be found, or a list of the actions
      * that must be performed, in order, to fulfill the goal.
      */
-    GoapPlanner.prototype.plan = function (agent, availableActions, worldState, goal) {
+    GoapPlanner.prototype.plan = function (go, availableActions, worldState, goal) {
         // reset the actions so we can start fresh with them
         for (var _i = 0, availableActions_1 = availableActions; _i < availableActions_1.length; _i++) {
             var a = availableActions_1[_i];
@@ -33,7 +26,7 @@ var GoapPlanner = /** @class */ (function () {
         var usableActions = [];
         for (var _a = 0, availableActions_2 = availableActions; _a < availableActions_2.length; _a++) {
             var a = availableActions_2[_a];
-            if (a.checkProceduralPrecondition(agent)) {
+            if (a.checkProceduralPrecondition(go)) {
                 usableActions.push(a);
             }
         }
@@ -99,9 +92,9 @@ var GoapPlanner = /** @class */ (function () {
         for (var _i = 0, usableActions_1 = usableActions; _i < usableActions_1.length; _i++) {
             var action = usableActions_1[_i];
             // if the parent state has the conditions for this action's preconditions, we can use it here
-            if (this.inState(action.Preconditions, parent.state)) {
+            if (this.inState(action.preconditions, parent.state)) {
                 // apply the action's effects to the parent state
-                var currentState = this.populateState(parent.state, action.Effects);
+                var currentState = this.populateState(parent.state, action.effects);
                 var node = new PlanNode(parent, parent.runningCost + action.cost, currentState, action);
                 if (this.inState(goal, currentState)) {
                     // we found a solution!

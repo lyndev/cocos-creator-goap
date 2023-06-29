@@ -21,14 +21,9 @@ exports.ChopTreeAction = void 0;
 var TimeUtil_1 = require("../../../utils/TimeUtil");
 var ActionStatus_1 = require("../../ai/goap/ActionStatus");
 var GoapAction_1 = require("../../ai/goap/GoapAction");
+var VGameObject_1 = require("../../base/VGameObject");
 var Environment_1 = require("../Environment");
-/*
- * @Description:
- * @Author: RannarYang
- * @Date: 2018-09-06 00:09:12
- * @Last Modified by: RannarYang
- * @Last Modified time: 2018-10-28 11:32:23
- */
+var Labourer_1 = require("../labourers/Labourer");
 var ChopTreeAction = /** @class */ (function (_super) {
     __extends(ChopTreeAction, _super);
     function ChopTreeAction() {
@@ -56,16 +51,17 @@ var ChopTreeAction = /** @class */ (function (_super) {
         var trees = Environment_1.Environment.treeComps;
         var closest = null;
         var closestDist = 0;
+        var vg = agent.getComponent(VGameObject_1.VGameObject);
         for (var _i = 0, trees_1 = trees; _i < trees_1.length; _i++) {
             var tree = trees_1[_i];
             if (closest == null) {
                 // first one, so choose it for now
                 closest = tree;
-                closestDist = tree.distanceSquare(agent);
+                closestDist = tree.distanceSquare(vg);
             }
             else {
                 // is this one closer than the last?
-                var dist = tree.distanceSquare(agent);
+                var dist = tree.distanceSquare(vg);
                 if (dist < closestDist) {
                     // we found a closer one, use it
                     closest = tree;
@@ -78,8 +74,8 @@ var ChopTreeAction = /** @class */ (function (_super) {
         this.target = closest;
         return closest != null;
     };
-    ChopTreeAction.prototype.perform = function (iGoap) {
-        var labourer = iGoap;
+    ChopTreeAction.prototype.perform = function (node) {
+        var labourer = node.getComponent(Labourer_1.Labourer);
         if (this.startTime == 0)
             this.startTime = TimeUtil_1.default.getTime();
         if (TimeUtil_1.default.getTime() - this.startTime > this.workDuration) {

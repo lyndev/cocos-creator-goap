@@ -21,14 +21,9 @@ exports.MineOreAction = void 0;
 var TimeUtil_1 = require("../../../utils/TimeUtil");
 var ActionStatus_1 = require("../../ai/goap/ActionStatus");
 var GoapAction_1 = require("../../ai/goap/GoapAction");
+var VGameObject_1 = require("../../base/VGameObject");
 var Environment_1 = require("../Environment");
-/*
- * @Description:
- * @Author: RannarYang
- * @Date: 2018-09-06 00:13:23
- * @Last Modified by: RannarYang
- * @Last Modified time: 2018-10-28 11:36:36
- */
+var Labourer_1 = require("../labourers/Labourer");
 var MineOreAction = /** @class */ (function (_super) {
     __extends(MineOreAction, _super);
     function MineOreAction() {
@@ -56,16 +51,17 @@ var MineOreAction = /** @class */ (function (_super) {
         var rocks = Environment_1.Environment.rockComps;
         var closest = null;
         var closestDist = 0;
+        var vg = agent.getComponent(VGameObject_1.VGameObject);
         for (var _i = 0, rocks_1 = rocks; _i < rocks_1.length; _i++) {
             var rock = rocks_1[_i];
             if (closest == null) {
                 // first one, so choose it for now
                 closest = rock;
-                closestDist = rock.distanceSquare(agent);
+                closestDist = rock.distanceSquare(vg);
             }
             else {
                 // is this one closer than the last?
-                var dist = rock.distanceSquare(agent);
+                var dist = rock.distanceSquare(vg);
                 if (dist < closestDist) {
                     // we found a closer one, use it
                     closest = rock;
@@ -76,13 +72,13 @@ var MineOreAction = /** @class */ (function (_super) {
         this.target = closest;
         return closest != null;
     };
-    MineOreAction.prototype.perform = function (labourer) {
+    MineOreAction.prototype.perform = function (node) {
         if (this.startTime == 0)
             this.startTime = TimeUtil_1.default.getTime();
         if (TimeUtil_1.default.getTime() - this.startTime > this.miningDuration) {
             // finished mining
+            var labourer = node.getComponent(Labourer_1.Labourer);
             var backpack = labourer.backpack;
-            ;
             backpack.numOre += 2;
             this.mined = true;
             var tool = labourer.tool;

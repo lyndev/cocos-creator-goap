@@ -49,7 +49,7 @@ var GotoFireAction = /** @class */ (function (_super) {
     GotoFireAction.prototype.requiresInRange = function () {
         return true;
     };
-    GotoFireAction.prototype.checkProceduralPrecondition = function (agent) {
+    GotoFireAction.prototype.checkProceduralPrecondition = function (go) {
         this.target = Environment_1.Environment.fireTarget;
         return this.target != null;
         // // TODO:find the nearest tree that we can chop
@@ -76,7 +76,7 @@ var GotoFireAction = /** @class */ (function (_super) {
         // this.target = closest;
         // return closest != null;
     };
-    GotoFireAction.prototype.perform = function (goapAgent) {
+    GotoFireAction.prototype.perform = function (node) {
         if (this.startTime == 0)
             this.startTime = TimeUtil_1.default.getTime();
         if (TimeUtil_1.default.getTime() - this.startTime > this.workDuration) {

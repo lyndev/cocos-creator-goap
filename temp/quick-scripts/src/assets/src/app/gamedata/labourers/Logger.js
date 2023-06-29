@@ -25,25 +25,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Logger = void 0;
 var ActionStatus_1 = require("../../ai/goap/ActionStatus");
+var VGameObject_1 = require("../../base/VGameObject");
 var ChopTreeAction_1 = require("../actions/ChopTreeAction");
 var DropOffLogsAction_1 = require("../actions/DropOffLogsAction");
 var PickUpToolAction_1 = require("../actions/PickUpToolAction");
 var Labourer_1 = require("./Labourer");
-/*
- * @Description: 樵夫
- * @Author: Rannar.Yang
- * @Date: 2018-09-05 20:40:44
- * @Last Modified by: RannarYang
- * @Last Modified time: 2018-11-04 18:22:04
+/**
+ * 樵夫
  */
-var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
+var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property, requireComponent = _a.requireComponent;
 var Logger = /** @class */ (function (_super) {
     __extends(Logger, _super);
     function Logger() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    Logger.prototype.initAvaliableActions = function () {
-        this.toInitAvaliableActions([ChopTreeAction_1.ChopTreeAction, DropOffLogsAction_1.DropOffLogsAction, PickUpToolAction_1.PickUpToolAction]);
+    Logger.prototype.onLoad = function () {
+        _super.prototype.onLoad.call(this);
+        this.initAvaliableActions([ChopTreeAction_1.ChopTreeAction, DropOffLogsAction_1.DropOffLogsAction, PickUpToolAction_1.PickUpToolAction]);
     };
     /**
      * Our only goal will ever be to chop trees.
@@ -58,7 +56,8 @@ var Logger = /** @class */ (function (_super) {
         console.log("原木：" + this.backpack.numLogs);
     };
     Logger = __decorate([
-        ccclass
+        ccclass,
+        requireComponent(VGameObject_1.VGameObject)
     ], Logger);
     return Logger;
 }(Labourer_1.Labourer));

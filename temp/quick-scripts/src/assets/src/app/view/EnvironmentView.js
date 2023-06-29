@@ -76,28 +76,12 @@ var EnvironmentView = /** @class */ (function (_super) {
         this.miner.setBackPack(minerBP);
         var woodCutterBP = new BackPackComponent_1.BackPackComponent(0, 0, 0);
         this.woodCutter.setBackPack(woodCutterBP);
-        this.startTick();
-        // this.update(3);
-    };
-    /**开始游戏stick */
-    EnvironmentView.prototype.startTick = function () {
-        //this.lastTimeStamp = TimeUtil.getTime();
-        //	egret.startTick(this.updateTimeStamp, this);
-    };
-    EnvironmentView.prototype.updateTimeStamp = function (timeStamp) {
-        this.update(timeStamp - this.lastTimeStamp);
-        this.lastTimeStamp = timeStamp;
-        return true;
     };
     EnvironmentView.prototype.update = function (dt) {
-        //this.curTime -= dt
-        //if (this.curTime <= 0) {
-        //this.curTime = 1
         this.miner.update(dt);
         this.blackSmith.update(dt);
         this.logger.update(dt);
         this.woodCutter.update(dt);
-        //}
     };
     __decorate([
         property(SupplyPileComponent_1.SupplyPileComponent)

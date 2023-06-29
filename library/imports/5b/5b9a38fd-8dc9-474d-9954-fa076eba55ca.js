@@ -19,12 +19,8 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.VMiner = void 0;
 var VLabourer_1 = require("./VLabourer");
-/*
- * @Description: 矿工
- * @Author: RannarYang
- * @Date: 2018-11-03 12:14:32
- * @Last Modified by: RannarYang
- * @Last Modified time: 2018-11-03 12:17:13
+/**
+ * 矿工
  */
 var VMiner = /** @class */ (function (_super) {
     __extends(VMiner, _super);

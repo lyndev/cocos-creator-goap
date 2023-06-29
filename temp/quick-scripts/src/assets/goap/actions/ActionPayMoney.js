@@ -41,12 +41,12 @@ var ActionPayMoney = /** @class */ (function (_super) {
     ActionPayMoney.prototype.requiresInRange = function () {
         return true;
     };
-    ActionPayMoney.prototype.checkProceduralPrecondition = function (agent) {
+    ActionPayMoney.prototype.checkProceduralPrecondition = function (node) {
         if (Environment_1.Environment.storeA.isHaveGoods()) {
             return true;
         }
     };
-    ActionPayMoney.prototype.perform = function (agent) {
+    ActionPayMoney.prototype.perform = function (node) {
         if (this.startTime == 0)
             this.startTime = TimeUtil_1.default.getTime();
         if (TimeUtil_1.default.getTime() - this.startTime > this.workDuration) {

@@ -20,14 +20,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.DropOffLogsAction = void 0;
 var ActionStatus_1 = require("../../ai/goap/ActionStatus");
 var GoapAction_1 = require("../../ai/goap/GoapAction");
+var VGameObject_1 = require("../../base/VGameObject");
 var Environment_1 = require("../Environment");
-/*
- * @Description:
- * @Author: RannarYang
- * @Date: 2018-09-06 00:08:59
- * @Last Modified by: RannarYang
- * @Last Modified time: 2018-10-28 11:34:06
- */
+var Labourer_1 = require("../labourers/Labourer");
 var DropOffLogsAction = /** @class */ (function (_super) {
     __extends(DropOffLogsAction, _super);
     function DropOffLogsAction() {
@@ -52,16 +47,17 @@ var DropOffLogsAction = /** @class */ (function (_super) {
         var supplyPiles = Environment_1.Environment.supplyPileComps;
         var closest = null;
         var closestDist = 0;
+        var vg = agent.getComponent(VGameObject_1.VGameObject);
         for (var _i = 0, supplyPiles_1 = supplyPiles; _i < supplyPiles_1.length; _i++) {
             var supply = supplyPiles_1[_i];
             if (closest == null) {
                 // first one, so choose it for now
                 closest = supply;
-                closestDist = supply.distanceSquare(agent);
+                closestDist = supply.distanceSquare(vg);
             }
             else {
                 // is this one closer than the last?
-                var dist = supply.distanceSquare(agent);
+                var dist = supply.distanceSquare(vg);
                 if (dist < closestDist) {
                     // we found a closer one, use it
                     closest = supply;
@@ -74,7 +70,8 @@ var DropOffLogsAction = /** @class */ (function (_super) {
         this.target = closest;
         return closest != null;
     };
-    DropOffLogsAction.prototype.perform = function (labourer) {
+    DropOffLogsAction.prototype.perform = function (node) {
+        var labourer = node.getComponent(Labourer_1.Labourer);
         var backpack = labourer.backpack;
         this.target.numLogs += backpack.numLogs;
         this.droppedOffLogs = true;

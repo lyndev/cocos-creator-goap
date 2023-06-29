@@ -4,6 +4,7 @@ import Fire from "../../../goap/Fire";
 import Sleep from "../../../goap/Sleep";
 import StoreA from "../../../goap/StoreA";
 import Toilet from "../../../goap/Toilet";
+import GoodsShelf from "../../../shopping/GoodsShelf";
 import { ChoppingBlockComponent } from "./ChoppingBlockComponent";
 import { ForgeComponent } from "./ForgeComponent";
 import { IronRockComponent } from "./IronRockComponent";
@@ -23,4 +24,8 @@ export class Environment {
 	public static equipTarget: Equip;
 	public static sleepTarget: Sleep
 	public static storeA: StoreA
+	//
+
+
+	public static goodsShelf:GoodsShelf
 }

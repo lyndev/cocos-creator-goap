@@ -16,7 +16,7 @@ import { GoapAction } from "./GoapAction";
  * It also provides an interface for the planner to give 
  * feedback to the Agent and report success/failure.
  */
-export interface IGoap {
+export interface 	IGoap {
 	/**
 	 * The starting state of the Agent and the world.
 	 * Supply what states are needed for actions to run.

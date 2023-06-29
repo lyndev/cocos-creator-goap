@@ -21,14 +21,9 @@ exports.ForgeToolAction = void 0;
 var TimeUtil_1 = require("../../../utils/TimeUtil");
 var ActionStatus_1 = require("../../ai/goap/ActionStatus");
 var GoapAction_1 = require("../../ai/goap/GoapAction");
+var VGameObject_1 = require("../../base/VGameObject");
 var Environment_1 = require("../Environment");
-/*
- * @Description:
- * @Author: RannarYang
- * @Date: 2018-09-06 00:12:33
- * @Last Modified by: RannarYang
- * @Last Modified time: 2018-10-28 11:36:06
- */
+var Labourer_1 = require("../labourers/Labourer");
 var ForgeToolAction = /** @class */ (function (_super) {
     __extends(ForgeToolAction, _super);
     function ForgeToolAction() {
@@ -50,21 +45,22 @@ var ForgeToolAction = /** @class */ (function (_super) {
     ForgeToolAction.prototype.requiresInRange = function () {
         return true;
     };
-    ForgeToolAction.prototype.checkProceduralPrecondition = function (agent) {
+    ForgeToolAction.prototype.checkProceduralPrecondition = function (go) {
         //TODO: find the nearest forge
         var forges = Environment_1.Environment.forgeComps;
         var closest = null;
         var closestDist = 0;
+        var vg = go.getComponent(VGameObject_1.VGameObject);
         for (var _i = 0, forges_1 = forges; _i < forges_1.length; _i++) {
             var forge = forges_1[_i];
             if (closest == null) {
                 // first one, so choose it for now
                 closest = forge;
-                closestDist = forge.distanceSquare(agent);
+                closestDist = forge.distanceSquare(vg);
             }
             else {
                 // is this one closer than the last?
-                var dist = forge.distanceSquare(agent);
+                var dist = forge.distanceSquare(vg);
                 if (dist < closestDist) {
                     // we found a closer one, use it
                     closest = forge;
@@ -77,10 +73,11 @@ var ForgeToolAction = /** @class */ (function (_super) {
         this.target = closest;
         return closest != null;
     };
-    ForgeToolAction.prototype.perform = function (labourer) {
+    ForgeToolAction.prototype.perform = function (node) {
         if (this.startTime == 0)
             this.startTime = TimeUtil_1.default.getTime();
         if (TimeUtil_1.default.getTime() - this.startTime > this.forgeDuration) {
+            var labourer = node.getComponent(Labourer_1.Labourer);
             // finished forging a tool
             var backpack = labourer.backpack;
             backpack.numOre = 0;

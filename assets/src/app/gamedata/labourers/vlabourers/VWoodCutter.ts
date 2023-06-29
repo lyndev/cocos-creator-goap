@@ -1,12 +1,8 @@
 import { WoodCutter } from "../WoodCutter";
 import { VLabourer } from "./VLabourer";
 
-/*
- * @Description: 伐木工
- * @Author: RannarYang 
- * @Date: 2018-11-03 12:13:51 
- * @Last Modified by: RannarYang
- * @Last Modified time: 2018-11-03 12:17:39
+/**
+ * 伐木工
  */
 export class VWoodCutter extends VLabourer {
 	protected labourer: WoodCutter;

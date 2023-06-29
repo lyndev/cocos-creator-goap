@@ -18,6 +18,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.StatePerformAction = void 0;
+var GoapAgent_1 = require("../../goap/GoapAgent");
 var StateBase_1 = require("./StateBase");
 var StateEnum_1 = require("./StateEnum");
 var StatePerformAction = /** @class */ (function (_super) {
@@ -25,49 +26,48 @@ var StatePerformAction = /** @class */ (function (_super) {
     function StatePerformAction() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    StatePerformAction.prototype.onEnter = function () {
-    };
+    StatePerformAction.prototype.onEnter = function () { };
     /**
      * 状态更新
      * @return
      */
     StatePerformAction.prototype.onUpdate = function (timeStamp) {
-        var owner = this.owner;
-        var goap = owner.getGoap();
-        if (!owner.hasActionPlan()) {
+        var goapAgent = this.owner.getComponent(GoapAgent_1.GoapAgent);
+        var goap = goapAgent.getGoap();
+        if (!goapAgent.hasActionPlan()) {
             // no actions to perform
             console.log("Done actions");
-            this.owner.changeState(StateEnum_1.StateEnum.StateIdle);
+            goapAgent.changeState(StateEnum_1.StateEnum.StateIdle);
             goap.actionsFinished();
             return;
         }
-        var action = this.owner.peekCurrentActions();
+        var action = goapAgent.peekCurrentActions();
         if (action.isDone()) {
             // the action is done. Remove it so we can perform the next one
-            this.owner.dequeueCurrentActions();
+            goapAgent.dequeueCurrentActions();
         }
-        if (this.owner.hasActionPlan()) {
+        if (goapAgent.hasActionPlan()) {
             // perform the next action
-            action = this.owner.peekCurrentActions();
+            action = goapAgent.peekCurrentActions();
             var inRange = action.requiresInRange() ? action.isInRange() : true;
             if (inRange) {
                 // we are in range, so perform the action
                 var success = action.perform(this.owner);
                 if (!success) {
                     // action failed, we need to plan again
-                    this.owner.changeState(StateEnum_1.StateEnum.StateIdle);
+                    goapAgent.changeState(StateEnum_1.StateEnum.StateIdle);
                     goap.planAborted(action);
                 }
             }
             else {
                 // we need to move there first
                 //TODO: push moveTo state
-                this.owner.changeState(StateEnum_1.StateEnum.StateMove);
+                goapAgent.changeState(StateEnum_1.StateEnum.StateMove);
             }
         }
         else {
             // no actions left, move to Plan state
-            this.owner.changeState(StateEnum_1.StateEnum.StateIdle);
+            goapAgent.changeState(StateEnum_1.StateEnum.StateIdle);
             goap.actionsFinished();
         }
     };
