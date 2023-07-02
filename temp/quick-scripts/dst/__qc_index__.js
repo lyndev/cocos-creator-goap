@@ -34,6 +34,8 @@ require('./assets/goap/goaps/GoapOutFireExigence');
 require('./assets/shopping/ActionBuyProduct');
 require('./assets/shopping/ActionBuyerLeave');
 require('./assets/shopping/ActionBuyerPay');
+require('./assets/shopping/ActionGetBag');
+require('./assets/shopping/BagPoint');
 require('./assets/shopping/Buyer');
 require('./assets/shopping/Checkstand');
 require('./assets/shopping/ContextShop');

@@ -8,7 +8,8 @@ export default class ActionBuyerPay extends GoapAction {
     public target: Checkstand
     constructor() {
         super()
-        this.addPrecondition("hasProduct", true)
+        this.addPrecondition("hasProduct1", true)
+        this.addPrecondition("hasProduct2", true)
         this.addPrecondition("payed", false)
         this.addEffect("payed", true)
     }

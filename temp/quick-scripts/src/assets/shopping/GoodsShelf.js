@@ -36,6 +36,7 @@ var GoodsShelf = /** @class */ (function (_super) {
     __extends(GoodsShelf, _super);
     function GoodsShelf() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.cfgId = 0;
         _this.interval = 3;
         return _this;
     }
@@ -43,7 +44,7 @@ var GoodsShelf = /** @class */ (function (_super) {
         this.product = new Product();
         this.product.amount = 10;
         this.product.maxAmount = 10;
-        this.product.cfgId = 1;
+        this.product.cfgId = this.cfgId;
     };
     GoodsShelf.prototype.has = function (count) {
         return this.product.amount >= count;
@@ -64,6 +65,9 @@ var GoodsShelf = /** @class */ (function (_super) {
             this.add(1);
         }
     };
+    __decorate([
+        property(cc.Integer)
+    ], GoodsShelf.prototype, "cfgId", void 0);
     GoodsShelf = __decorate([
         ccclass
     ], GoodsShelf);

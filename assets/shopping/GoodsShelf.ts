@@ -5,16 +5,19 @@ export class Product {
     amount: number
     maxAmount: number
 }
-const { ccclass, property } = cc._decorator;
+const { ccclass, property } = cc._decorator
 @ccclass
 export default class GoodsShelf extends VGameObject {
+    @property(cc.Integer)
+    cfgId: number = 0
+
     product: Product
     interval: number = 3
     protected onLoad(): void {
         this.product = new Product()
         this.product.amount = 10
         this.product.maxAmount = 10
-        this.product.cfgId = 1
+        this.product.cfgId = this.cfgId
     }
 
     public has(count) {

@@ -25,7 +25,8 @@ var ActionBuyerPay = /** @class */ (function (_super) {
     function ActionBuyerPay() {
         var _this = _super.call(this) || this;
         _this.bDone = false;
-        _this.addPrecondition("hasProduct", true);
+        _this.addPrecondition("hasProduct1", true);
+        _this.addPrecondition("hasProduct2", true);
         _this.addPrecondition("payed", false);
         _this.addEffect("payed", true);
         return _this;

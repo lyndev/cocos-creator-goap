@@ -25,6 +25,7 @@ var ActionBuyerLeave = /** @class */ (function (_super) {
         var _this = _super.call(this) || this;
         _this.bDone = false;
         _this.addPrecondition("payed", true);
+        _this.addPrecondition("leaved", false);
         _this.addEffect("leaved", true);
         return _this;
     }

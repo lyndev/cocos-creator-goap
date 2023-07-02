@@ -50,8 +50,8 @@
     "relativePath": "src/app"
   },
   "9822b875-e292-49e5-ba4a-2018649a213f": {
-    "asset": 1687956394317,
-    "meta": 1687956446541,
+    "asset": 1688310017801,
+    "meta": 1688312371272,
     "relativePath": "src/app/ai"
   },
   "14e181f3-613e-4e33-aab6-c3323e62aec1": {
@@ -800,8 +800,8 @@
     "relativePath": "model/primitives.fbx"
   },
   "35409d9f-961a-404b-a489-bb8e350059d0": {
-    "asset": 1688043198031,
-    "meta": 1688043842329,
+    "asset": 1688140940485,
+    "meta": 1688312371271,
     "relativePath": "shopping"
   },
   "f776d071-3886-4280-b33a-b1ccc10a19e6": {
@@ -1019,49 +1019,59 @@
     "meta": 1688057093227,
     "relativePath": "src/app/ai/goap/GoapAction.ts"
   },
-  "197c44cf-37b1-4f95-9dd1-65808c51ad58": {
-    "asset": 1688057083983,
-    "meta": 1688057093243,
-    "relativePath": "shopping/ActionBuyerLeave.ts"
-  },
   "039b51a6-212f-48bb-8bc1-fb6235871d27": {
     "asset": 1688057421331,
     "meta": 1688057426147,
     "relativePath": "shopping/Checkstand.ts"
-  },
-  "bcdfd157-18e1-40ec-828f-a9c6a0de3d29": {
-    "asset": 1688057425163,
-    "meta": 1688057426165,
-    "relativePath": "shopping/ContextShop.ts"
-  },
-  "0cfabd1d-a667-4d3d-b951-84631c881f16": {
-    "asset": 1688057408591,
-    "meta": 1688057426188,
-    "relativePath": "shopping/GoodsShelf.ts"
   },
   "117f2e29-b4f1-435a-a6ed-370685a10dbe": {
     "asset": 1688057414185,
     "meta": 1688057426196,
     "relativePath": "shopping/LeavePoint.ts"
   },
+  "355fedf6-a924-4c0a-8441-620e85167767": {
+    "asset": 1688140844648,
+    "meta": 1688140845028,
+    "relativePath": "shopping/BagPoint.ts"
+  },
+  "9627186a-5359-4332-85cb-4c2cd4f98fb8": {
+    "asset": 1688313504338,
+    "meta": 1688313504347,
+    "relativePath": "shopping.fire"
+  },
+  "bcdfd157-18e1-40ec-828f-a9c6a0de3d29": {
+    "asset": 1688312657417,
+    "meta": 1688312663752,
+    "relativePath": "shopping/ContextShop.ts"
+  },
+  "0cfabd1d-a667-4d3d-b951-84631c881f16": {
+    "asset": 1688313202579,
+    "meta": 1688313205830,
+    "relativePath": "shopping/GoodsShelf.ts"
+  },
+  "197c44cf-37b1-4f95-9dd1-65808c51ad58": {
+    "asset": 1688313606098,
+    "meta": 1688313656751,
+    "relativePath": "shopping/ActionBuyerLeave.ts"
+  },
   "989b0017-5e42-4808-9d73-76a87a5fc018": {
-    "asset": 1688057714765,
-    "meta": 1688057715667,
+    "asset": 1688313650360,
+    "meta": 1688313656773,
     "relativePath": "shopping/ActionBuyerPay.ts"
   },
   "cca271df-e395-4c2c-8392-5602a0ef41b4": {
-    "asset": 1688058003270,
-    "meta": 1688058021726,
+    "asset": 1688313832553,
+    "meta": 1688313858691,
     "relativePath": "shopping/ActionBuyProduct.ts"
   },
-  "528f7c8d-9327-42a5-95ec-dc08c46f29b2": {
-    "asset": 1688058020189,
-    "meta": 1688058021819,
-    "relativePath": "shopping/Buyer.ts"
+  "e575056c-7f60-45a5-9b8e-aa131a6965d3": {
+    "asset": 1688313723489,
+    "meta": 1688313858705,
+    "relativePath": "shopping/ActionGetBag.ts"
   },
-  "9627186a-5359-4332-85cb-4c2cd4f98fb8": {
-    "asset": 1688058022355,
-    "meta": 1688058022368,
-    "relativePath": "shopping.fire"
+  "528f7c8d-9327-42a5-95ec-dc08c46f29b2": {
+    "asset": 1688313748003,
+    "meta": 1688313858810,
+    "relativePath": "shopping/Buyer.ts"
   }
 }

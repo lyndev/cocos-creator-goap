@@ -23,6 +23,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var BagPoint_1 = require("./BagPoint");
 var Checkstand_1 = require("./Checkstand");
 var GoodsShelf_1 = require("./GoodsShelf");
 var LeavePoint_1 = require("./LeavePoint");
@@ -32,26 +33,36 @@ var ContextShop = /** @class */ (function (_super) {
     function ContextShop() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.goodsShelf = null;
+        _this.goodsShelf2 = null;
         _this.checkstand = null;
         _this.leavePoint = null;
+        _this.bagPoint = null;
         return _this;
     }
     ContextShop_1 = ContextShop;
     ContextShop.prototype.onLoad = function () {
         ContextShop_1.goodsShelf = this.goodsShelf;
+        ContextShop_1.goodsShelf2 = this.goodsShelf2;
         ContextShop_1.checkstand = this.checkstand;
         ContextShop_1.leavePoint = this.leavePoint;
+        ContextShop_1.bagPoint = this.bagPoint;
     };
     var ContextShop_1;
     __decorate([
         property(GoodsShelf_1.default)
     ], ContextShop.prototype, "goodsShelf", void 0);
     __decorate([
+        property(GoodsShelf_1.default)
+    ], ContextShop.prototype, "goodsShelf2", void 0);
+    __decorate([
         property(Checkstand_1.default)
     ], ContextShop.prototype, "checkstand", void 0);
     __decorate([
         property(LeavePoint_1.default)
     ], ContextShop.prototype, "leavePoint", void 0);
+    __decorate([
+        property(BagPoint_1.default)
+    ], ContextShop.prototype, "bagPoint", void 0);
     ContextShop = ContextShop_1 = __decorate([
         ccclass
     ], ContextShop);

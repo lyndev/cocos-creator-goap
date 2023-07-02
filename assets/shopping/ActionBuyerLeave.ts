@@ -8,6 +8,7 @@ export default class ActionBuyerLeave extends GoapAction {
     constructor() {
         super()
         this.addPrecondition("payed", true)
+        this.addPrecondition("leaved", false)
         this.addEffect("leaved", true)
     }
 

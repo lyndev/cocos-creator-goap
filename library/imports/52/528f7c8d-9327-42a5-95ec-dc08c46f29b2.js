@@ -28,6 +28,7 @@ var GoapAgent_1 = require("../src/app/ai/goap/GoapAgent");
 var ActionBuyerLeave_1 = require("./ActionBuyerLeave");
 var ActionBuyerPay_1 = require("./ActionBuyerPay");
 var ActionBuyProduct_1 = require("./ActionBuyProduct");
+var ActionGetBag_1 = require("./ActionGetBag");
 var GoodsShelf_1 = require("./GoodsShelf");
 var ccclass = cc._decorator.ccclass;
 var Buyer = /** @class */ (function (_super) {
@@ -36,6 +37,7 @@ var Buyer = /** @class */ (function (_super) {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.bMoving = false;
         _this.bMoveEnd = false;
+        _this.bPayed = false;
         return _this;
     }
     Buyer.prototype.onLoad = function () {
@@ -44,11 +46,16 @@ var Buyer = /** @class */ (function (_super) {
         var needProd = new GoodsShelf_1.Product();
         needProd.amount = 0;
         needProd.cfgId = 1;
-        needProd.maxAmount = 20;
+        needProd.maxAmount = 10;
+        var needProd2 = new GoodsShelf_1.Product();
+        needProd2.amount = 0;
+        needProd2.cfgId = 2;
+        needProd2.maxAmount = 10;
         this.needPrdoucts.set(1, needProd);
+        this.needPrdoucts.set(2, needProd2);
         var goapAgent = this.getComponent(GoapAgent_1.GoapAgent);
         goapAgent.setGoap(this);
-        this.initAvaliableActions([ActionBuyProduct_1.default, ActionBuyerPay_1.default, ActionBuyerLeave_1.default]);
+        this.initAvaliableActions([ActionGetBag_1.default, ActionBuyerPay_1.default, ActionBuyerLeave_1.default]);
     };
     Buyer.prototype.getProducts = function () {
         return this.needPrdoucts;
@@ -60,19 +67,24 @@ var Buyer = /** @class */ (function (_super) {
             action = new actionCls[i]();
             this.availableActions.push(action);
         }
+        this.availableActions.push(new ActionBuyProduct_1.default(1));
+        this.availableActions.push(new ActionBuyProduct_1.default(2));
     };
     Buyer.prototype.update = function (dt) {
         _super.prototype.update.call(this, dt);
     };
     Buyer.prototype.getWorldState = function () {
         var worldData = new Map();
-        worldData.set("hasProduct", false);
-        worldData.set("payed", false);
+        worldData.set("hasProduct1", this.hasProductFull(1));
+        worldData.set("hasProduct2", this.hasProductFull(2));
+        worldData.set("payed", this.bPayed);
         worldData.set("leaved", false);
         return worldData;
     };
     Buyer.prototype.createGoalState = function () {
         var goal = new Map();
+        goal.set("hasProduct1", true);
+        goal.set("hasProduct2", true);
         goal.set("leaved", true);
         return goal;
     };

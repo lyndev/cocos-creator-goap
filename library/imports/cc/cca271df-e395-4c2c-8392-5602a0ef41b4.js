@@ -22,11 +22,12 @@ var Buyer_1 = require("./Buyer");
 var ContextShop_1 = require("./ContextShop");
 var ActionBuyProduct = /** @class */ (function (_super) {
     __extends(ActionBuyProduct, _super);
-    function ActionBuyProduct() {
+    function ActionBuyProduct(cfgId) {
         var _this = _super.call(this) || this;
         _this.bDone = false;
-        _this.addPrecondition("hasProduct", false);
-        _this.addEffect("hasProduct", true);
+        _this.cfgId = cfgId;
+        _this.addPrecondition("hasProduct" + cfgId, false);
+        _this.addEffect("hasProduct" + cfgId, true);
         return _this;
     }
     ActionBuyProduct.prototype.reset = function () {
@@ -36,20 +37,28 @@ var ActionBuyProduct = /** @class */ (function (_super) {
         return this.bDone;
     };
     ActionBuyProduct.prototype.checkProceduralPrecondition = function (go) {
-        if (ContextShop_1.default.goodsShelf) {
-            this.target = ContextShop_1.default.goodsShelf;
-            return true;
+        if (this.cfgId == 1) {
+            if (ContextShop_1.default.goodsShelf) {
+                this.target = ContextShop_1.default.goodsShelf;
+                return true;
+            }
+        }
+        else if (this.cfgId == 2) {
+            if (ContextShop_1.default.goodsShelf2) {
+                this.target = ContextShop_1.default.goodsShelf2;
+                return true;
+            }
         }
         return false;
     };
     ActionBuyProduct.prototype.perform = function (node) {
-        if (this.target.has(1)) {
-            this.target.cost(1);
+        if (this.target.has(this.cfgId)) {
+            this.target.cost(this.cfgId);
             var buyer = node.getComponent(Buyer_1.Buyer);
-            buyer.addProduct(1, 1);
-            if (buyer.hasProductFull(1)) {
+            buyer.addProduct(this.cfgId, 1);
+            if (buyer.hasProductFull(this.cfgId)) {
                 this.bDone = true;
-                console.log("购物完成");
+                console.log("购物完成", this.target.node.name, this.cfgId);
             }
         }
         return true;

@@ -4,6 +4,7 @@ import { IGoap } from "../src/app/ai/goap/IGoap"
 import ActionBuyerLeave from "./ActionBuyerLeave"
 import ActionBuyerPay from "./ActionBuyerPay"
 import ActionBuyProduct from "./ActionBuyProduct"
+import ActionGetBag from "./ActionGetBag"
 import { Product } from "./GoodsShelf"
 
 const { ccclass } = cc._decorator
@@ -12,19 +13,27 @@ export class Buyer extends GoapAgent implements IGoap {
     bMoving = false
     bMoveEnd = false
     needPrdoucts: Map<number, Product>
-
+    bPayed: boolean = false
     public onLoad() {
         super.onLoad()
         this.needPrdoucts = new Map<number, Product>()
         let needProd = new Product()
         needProd.amount = 0
         needProd.cfgId = 1
-        needProd.maxAmount = 20
+        needProd.maxAmount = 10
+
+        let needProd2 = new Product()
+        needProd2.amount = 0
+        needProd2.cfgId = 2
+        needProd2.maxAmount = 10
+
         this.needPrdoucts.set(1, needProd)
+        this.needPrdoucts.set(2, needProd2)
+
         let goapAgent = this.getComponent(GoapAgent)
         goapAgent.setGoap(this)
 
-        this.initAvaliableActions([ActionBuyProduct, ActionBuyerPay, ActionBuyerLeave])
+        this.initAvaliableActions([ActionGetBag, ActionBuyerPay, ActionBuyerLeave])
     }
 
     public getProducts() {
@@ -38,6 +47,9 @@ export class Buyer extends GoapAgent implements IGoap {
             action = new actionCls[i]()
             this.availableActions.push(action)
         }
+
+        this.availableActions.push(new ActionBuyProduct(1))
+        this.availableActions.push(new ActionBuyProduct(2))
     }
 
     public update(dt: number) {
@@ -46,14 +58,17 @@ export class Buyer extends GoapAgent implements IGoap {
 
     public getWorldState(): Map<string, Object> {
         let worldData: Map<string, Object> = new Map<string, Object>()
-        worldData.set("hasProduct", false)
-        worldData.set("payed", false)
+        worldData.set("hasProduct1", this.hasProductFull(1))
+        worldData.set("hasProduct2", this.hasProductFull(2))
+        worldData.set("payed", this.bPayed)
         worldData.set("leaved", false)
         return worldData
     }
 
     public createGoalState(): Map<string, Object> {
         let goal = new Map<string, Object>()
+        goal.set("hasProduct1", true)
+        goal.set("hasProduct2", true)
         goal.set("leaved", true)
         return goal
     }
